@@ -41,6 +41,9 @@
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1"
   },
+  "peerDependencies": {
+    "react": ">= 15 | >= 16"
+  },
   "engines": {
     "node": ">= 6"
   },

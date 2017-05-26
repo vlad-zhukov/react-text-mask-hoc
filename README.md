@@ -32,17 +32,52 @@ export default class Example extends PureComponent {
     };
 
     _onChange(event) {
-
+        this.setState({value: event.target.value});
     }
 
     render() {
         return (
-            <MaskedInput
-                mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                guide={false}
-                value={this.state.value}
-                onChange={::this.onChange}
-            />
+            <div>
+                <MaskedInput
+                    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                    guide={false}
+                    value={this.state.value}
+                    onChange={::this.onChange}
+                />
+            </div>
+        );
+    }
+}
+```
+
+__in React Native__
+```js
+import React, {PureComponent} from 'react';
+import {View} from 'react-native';
+import createMaskedComponent from 'react-text-mask-hoc';
+import {TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
+
+const MaskedInput = createMaskedComponent(TextInputAdapter);
+
+export default class Example extends PureComponent {
+    state = {
+        value: '5554953947',
+    };
+
+    _onChange(nativeEvent) {
+        this.setState({value: nativeEvent.text});
+    }
+
+    render() {
+        return (
+            <View>
+                <MaskedInput
+                    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                    guide={false}
+                    value={this.state.value}
+                    onChange={::this.onChange}
+                />
+            </View>
         );
     }
 }
