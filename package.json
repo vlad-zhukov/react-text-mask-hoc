@@ -1,0 +1,73 @@
+{
+  "name": "react-text-mask-hoc",
+  "version": "0.1.0",
+  "description": "A higher order text-mask component for React and React Native.",
+  "author": "Vlad Zhukov (http://github.com/Vlad-Zhukov)",
+  "license": "MIT",
+  "repository": "Vlad-Zhukov/react-text-mask-hoc",
+  "bugs": {
+    "url": "https://github.com/Vlad-Zhukov/react-text-mask-hoc/issues"
+  },
+  "main": "./dist/react-text-mask-hoc.cjs.js",
+  "module": "./dist/react-text-mask-hoc.esm.js",
+  "jsnext:main": "./dist/react-text-mask-hoc.esm.js",
+  "scripts": {
+    "build": "rimraf dist/ && cross-env NODE_ENV=production rollup -c && cross-env NODE_ENV=production babel src/adapters/ -d ./",
+    "test": "jest",
+    "lint": "eslint '**/*.js'",
+    "prettier": "prettier-eslint --write '**/*.js'",
+    "prepublish": "yarn run lint && yarn run build && yarn run test"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "text-mask-core": "^5.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0",
+    "jest": "^20.0.4",
+    "prettier-eslint-cli": "^4.0.2",
+    "react": "^15.5.4",
+    "react-native": "^0.44.1",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1"
+  },
+  "engines": {
+    "node": ">= 6"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "text-mask",
+    "react-text-mask",
+    "react-component",
+    "react hoc",
+    "hoc",
+    "text mask",
+    "input mask",
+    "string mask",
+    "input formatting",
+    "text formatting",
+    "string formatting"
+  ],
+  "files": [
+    "src",
+    "dist",
+    "React.js",
+    "ReactNative.js"
+  ],
+  "jest": {
+    "roots": [
+      "<rootDir>/__tests__/"
+    ]
+  }
+}

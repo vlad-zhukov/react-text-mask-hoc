@@ -1,0 +1,23 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        ["env", {
+          "targets": {"node": "current"}
+        }],
+        "react",
+        "stage-0"
+      ]
+    },
+    "production": {
+      "presets": [
+        ["env", {
+          "targets": {"node": 6, "browsers": ["> 1%"]},
+          "modules": false
+        }],
+        "react",
+        "stage-0"
+      ]
+    }
+  }
+}
