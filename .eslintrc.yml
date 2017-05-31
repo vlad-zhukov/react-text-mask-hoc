@@ -1,6 +1,6 @@
 parser: babel-eslint
 
-extends: airbnb-base
+extends: airbnb
 
 env:
     browser: true
@@ -16,3 +16,7 @@ rules:
     no-plusplus: [error, {allowForLoopAfterthoughts: true}]
     object-curly-spacing: [error, never]
     no-console: off
+
+    react/jsx-filename-extension: [warn, {extensions: [.js]}]
+    react/jsx-indent: [error, 4]
+    react/jsx-indent-props: [error, 4]
