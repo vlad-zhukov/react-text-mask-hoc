@@ -1,7 +1,7 @@
 /* eslint-disable */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {createTextMaskInputElement} from 'text-mask-core';
+import React, {PureComponent} from "react"
+import PropTypes from "prop-types"
+import {createTextMaskInputElement} from "text-mask-core"
 /* eslint-enable */
 
 const isReactNative = window && !window.document;
@@ -26,14 +26,21 @@ export default WrappedComponent =>
             keepCharPositions: PropTypes.bool,
             showMask: PropTypes.bool,
             onChange: PropTypes.func,
-        };
+            componentRef: PropTypes.func,
+        }
 
         static defaultProps = {
+            guide: true,
+            value: '',
+            pipe: null,
+            placeholderChar: '_',
+            keepCharPositions: false,
+            showMask: false,
             onChange: () => {},
             componentRef: () => {},
-        };
+        }
 
-        textMaskInputElement;
+        textMaskInputElement
 
         componentDidMount() {
             if (isReactNative) document.addComponent(this.component);
@@ -54,14 +61,14 @@ export default WrappedComponent =>
             this.textMaskInputElement.update(value);
         }
 
-        _getRef(comp) {
+        _getRef = (comp) => {
             if (comp) {
                 this.props.componentRef(comp);
                 this.component = comp;
             }
         }
 
-        _onChange(event) {
+        _onChange = (event) => {
             if (event) {
                 this.textMaskInputElement.update();
                 this.props.onChange(event);
@@ -81,17 +88,10 @@ export default WrappedComponent =>
             delete rest.showMask;
             delete rest.componentRef;
 
-            return (
-                <WrappedComponent
-                    {...rest}
-                    value={value}
-                    onChange={::this._onChange}
-                    componentRef={::this._getRef}
-                />
-            );
+            return <WrappedComponent {...rest} value={value} onChange={this._onChange} componentRef={this._getRef} />;
         }
 
-        // Callback certain input functions.
+        // Callback input functions.
 
         focus() {
             this.component.focus();

@@ -1,9 +1,11 @@
 /* eslint-disable */
-import React, {PureComponent} from 'react';
-import {Text, TextInput, findNodeHandle} from 'react-native';
-import TextInputState from 'react-native/lib/TextInputState';
-import PropTypes from 'prop-types';
+import React, {PureComponent} from "react"
+import {Text, TextInput, findNodeHandle} from "react-native"
+import TextInputState from "react-native/lib/TextInputState"
+import PropTypes from "prop-types"
 /* eslint-enable */
+
+/* eslint-disable react/no-multi-comp */
 
 const components = {};
 
@@ -28,16 +30,15 @@ export class TextInputAdapter extends PureComponent {
         value: PropTypes.string.isRequired,
         componentRef: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
-        onSelectionChange: PropTypes.func,
-    };
+    }
 
-    _lastOnChangeEvent;
-    _selection;
-    _wait = false;
+    _lastOnChangeEvent // eslint-disable-line react/sort-comp
+    _selection
+    _wait = false
 
     state = {
         value: this.props.value,
-    };
+    }
 
     get value() {
         return this.state.value;
@@ -55,36 +56,36 @@ export class TextInputAdapter extends PureComponent {
         return this._selection ? this._selection.end : 0;
     }
 
-    setSelectionRange(start, end) {
-        this._selection = {start, end};
-    }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.state.value) {
             this.setState({value: nextProps.value});
         }
     }
 
-    _getRef(ref) {
+    setSelectionRange(start, end) {
+        this._selection = {start, end};
+    }
+
+    _getRef = (ref) => {
         this.input = ref;
     }
 
-    _onChange({nativeEvent}) {
+    _onChange = ({nativeEvent}) => {
         this._lastOnChangeEvent = nativeEvent;
     }
 
-    _onSelectionChange({nativeEvent}) {
+    _onSelectionChange = ({nativeEvent}) => {
         // Throttle events because they are called multiple times for an unknown reason.
         if (this._wait) return;
         this._wait = true;
-        setTimeout(() => { this._wait = false; }, 100);
+        setTimeout(() => {
+            this._wait = false;
+        }, 100);
 
         // onChange() is called before onSelectionChange(), so when text-mask gets selection
         // it's a previous value instead of the current one.
 
         this._selection = nativeEvent.selection;
-        if (this.props.onSelectionChange) this.props.onSelectionChange(nativeEvent);
-
         if (this._lastOnChangeEvent && this._lastOnChangeEvent.text !== this.state.value) {
             this.props.onChange(this._lastOnChangeEvent);
             this._lastOnChangeEvent = null;
@@ -100,11 +101,11 @@ export class TextInputAdapter extends PureComponent {
 
         return (
             <TextInput
-                ref={::this._getRef}
+                ref={this._getRef}
                 value={this.state.value}
                 selection={this._selection}
-                onChange={::this._onChange}
-                onSelectionChange={::this._onSelectionChange}
+                onChange={this._onChange}
+                onSelectionChange={this._onSelectionChange}
                 {...rest}
             />
         );
@@ -116,11 +117,11 @@ export class TextAdapter extends PureComponent {
         value: PropTypes.string.isRequired,
         componentRef: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
-    };
+    }
 
     state = {
         value: this.props.value,
-    };
+    }
 
     get value() {
         return this.state.value;
