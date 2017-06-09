@@ -33,6 +33,10 @@ export class SpanAdapter extends PureComponent {
         value: this.props.value,
     };
 
+    componentWillMount() {
+        this.props.componentRef(this);
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.state.value) {
             this.setState({value: nextProps.value});
@@ -48,8 +52,7 @@ export class SpanAdapter extends PureComponent {
     }
 
     render() {
-        const {value, componentRef, ...rest} = this.props;
-        componentRef(this);
+        const {value, componentRef, onChange, ...rest} = this.props;
 
         return <span {...rest}>{this.state.value}</span>;
     }

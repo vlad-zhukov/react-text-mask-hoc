@@ -55,6 +55,10 @@ export class TextInputAdapter extends PureComponent {
         return this._selection ? this._selection.end : 0;
     }
 
+    componentWillMount() {
+        this.props.componentRef(this);
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.state.value) {
             this.setState({value: nextProps.value});
@@ -96,7 +100,6 @@ export class TextInputAdapter extends PureComponent {
 
     render() {
         const {value, componentRef, onChange, ...rest} = this.props;
-        componentRef(this);
 
         return (
             <TextInput
@@ -115,7 +118,6 @@ export class TextAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.string.isRequired,
         componentRef: PropTypes.func.isRequired,
-        onChange: PropTypes.func.isRequired,
     };
 
     state = {
@@ -130,6 +132,10 @@ export class TextAdapter extends PureComponent {
         this.setState({value});
     }
 
+    componentWillMount() {
+        this.props.componentRef(this);
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.state.value) {
             this.setState({value: nextProps.value});
@@ -138,7 +144,6 @@ export class TextAdapter extends PureComponent {
 
     render() {
         const {value, componentRef, onChange, ...rest} = this.props;
-        componentRef(this);
 
         return <Text {...rest}>{this.state.value}</Text>;
     }
