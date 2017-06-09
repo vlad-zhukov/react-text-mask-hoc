@@ -76,19 +76,19 @@ export default WrappedComponent =>
         }
 
         render() {
-            const {value, ...rest} = this.props;
+            const {
+                mask,
+                guide,
+                pipe,
+                placeholderChar,
+                keepCharPositions,
+                onChange,
+                showMask,
+                componentRef,
+                ...rest
+            } = this.props;
 
-            delete rest.mask;
-            delete rest.guide;
-            delete rest.pipe;
-            delete rest.placeholderChar;
-            delete rest.keepCharPositions;
-            delete rest.value;
-            delete rest.onChange;
-            delete rest.showMask;
-            delete rest.componentRef;
-
-            return <WrappedComponent {...rest} value={value} onChange={this._onChange} componentRef={this._getRef} />;
+            return <WrappedComponent {...rest} onChange={this._onChange} componentRef={this._getRef} />;
         }
 
         // Callback input functions.
