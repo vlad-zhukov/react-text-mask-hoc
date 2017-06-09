@@ -26,7 +26,7 @@ import React, {PureComponent} from 'react';
 import createMaskedComponent from 'react-text-mask-hoc';
 import {InputAdapter} from 'react-text-mask-hoc/React';
 
-// You can provide your own adapter component or use one of included in the library
+// You can provide your own adapter component or use one of included in the library.
 const MaskedInput = createMaskedComponent(InputAdapter);
 
 export default class Example extends PureComponent {

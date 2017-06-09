@@ -6,7 +6,6 @@ import {createTextMaskInputElement} from 'text-mask-core';
 
 const isReactNative = window && !window.document;
 
-// eslint-disable-next-line no-unused-vars
 export default WrappedComponent =>
     class TextMask extends PureComponent {
         static propTypes = {
