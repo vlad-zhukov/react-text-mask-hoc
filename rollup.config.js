@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'production';
+
 const babel = require('rollup-plugin-babel');
 const pkg = require('./package.json');
 

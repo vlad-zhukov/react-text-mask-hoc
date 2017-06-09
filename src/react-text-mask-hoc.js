@@ -1,7 +1,7 @@
 /* eslint-disable */
-import React, {PureComponent} from "react"
-import PropTypes from "prop-types"
-import {createTextMaskInputElement} from "text-mask-core"
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+import {createTextMaskInputElement} from 'text-mask-core';
 /* eslint-enable */
 
 const isReactNative = window && !window.document;
@@ -27,7 +27,7 @@ export default WrappedComponent =>
             showMask: PropTypes.bool,
             onChange: PropTypes.func,
             componentRef: PropTypes.func,
-        }
+        };
 
         static defaultProps = {
             guide: true,
@@ -38,9 +38,9 @@ export default WrappedComponent =>
             showMask: false,
             onChange: () => {},
             componentRef: () => {},
-        }
+        };
 
-        textMaskInputElement
+        textMaskInputElement;
 
         componentDidMount() {
             if (isReactNative) document.addComponent(this.component);
@@ -66,14 +66,14 @@ export default WrappedComponent =>
                 this.props.componentRef(comp);
                 this.component = comp;
             }
-        }
+        };
 
         _onChange = (event) => {
             if (event) {
                 this.textMaskInputElement.update();
                 this.props.onChange(event);
             }
-        }
+        };
 
         render() {
             const {

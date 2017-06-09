@@ -1,6 +1,6 @@
 /* eslint-disable */
-import React, {PureComponent} from "react"
-import PropTypes from "prop-types"
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 /* eslint-enable */
 
 /* eslint-disable react/no-multi-comp */
@@ -10,11 +10,11 @@ export class InputAdapter extends PureComponent {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         componentRef: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
-    }
+    };
 
     static defaultProps = {
         value: '',
-    }
+    };
 
     render() {
         const {componentRef, ...rest} = this.props;
@@ -27,11 +27,11 @@ export class SpanAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         componentRef: PropTypes.func.isRequired,
-    }
+    };
 
     state = {
         value: this.props.value,
-    }
+    };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.state.value) {

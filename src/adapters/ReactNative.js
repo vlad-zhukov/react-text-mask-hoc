@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React, {PureComponent} from "react"
-import {Text, TextInput, findNodeHandle} from "react-native"
-import TextInputState from "react-native/lib/TextInputState"
-import PropTypes from "prop-types"
+import React, {PureComponent} from 'react';
+import {Text, TextInput, findNodeHandle} from 'react-native';
+import TextInputState from 'react-native/lib/TextInputState';
+import PropTypes from 'prop-types';
 /* eslint-enable */
 
 /* eslint-disable react/no-multi-comp */
@@ -30,15 +30,15 @@ export class TextInputAdapter extends PureComponent {
         value: PropTypes.string.isRequired,
         componentRef: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
-    }
+    };
 
-    _lastOnChangeEvent // eslint-disable-line react/sort-comp
-    _selection
-    _wait = false
+    _lastOnChangeEvent; // eslint-disable-line react/sort-comp
+    _selection;
+    _wait = false;
 
     state = {
         value: this.props.value,
-    }
+    };
 
     get value() {
         return this.state.value;
@@ -68,11 +68,11 @@ export class TextInputAdapter extends PureComponent {
 
     _getRef = (ref) => {
         this.input = ref;
-    }
+    };
 
     _onChange = ({nativeEvent}) => {
         this._lastOnChangeEvent = nativeEvent;
-    }
+    };
 
     _onSelectionChange = ({nativeEvent}) => {
         // Throttle events because they are called multiple times for an unknown reason.
@@ -93,7 +93,7 @@ export class TextInputAdapter extends PureComponent {
         else {
             this.forceUpdate();
         }
-    }
+    };
 
     render() {
         const {value, componentRef, onChange, ...rest} = this.props;
@@ -117,11 +117,11 @@ export class TextAdapter extends PureComponent {
         value: PropTypes.string.isRequired,
         componentRef: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
-    }
+    };
 
     state = {
         value: this.props.value,
-    }
+    };
 
     get value() {
         return this.state.value;
