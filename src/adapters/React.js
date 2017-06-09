@@ -27,6 +27,7 @@ export class SpanAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         componentRef: PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
     };
 
     state = {

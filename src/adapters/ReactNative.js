@@ -118,6 +118,7 @@ export class TextAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.string.isRequired,
         componentRef: PropTypes.func.isRequired,
+        onChange: PropTypes.func.isRequired,
     };
 
     state = {
