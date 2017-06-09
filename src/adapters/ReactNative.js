@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, {PureComponent} from 'react';
 import {Text, TextInput, findNodeHandle} from 'react-native';
-import TextInputState from 'react-native/lib/TextInputState';
 import PropTypes from 'prop-types';
 /* eslint-enable */
 
@@ -11,7 +10,7 @@ const components = {};
 
 global.document = {
     get activeElement() {
-        const tag = TextInputState.currentlyFocusedField();
+        const tag = TextInput.State.currentlyFocusedField();
         if (components[tag]) return components[tag];
         return null;
     },
