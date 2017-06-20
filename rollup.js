@@ -35,7 +35,7 @@ rollup
     .then((bundle) => {
         bundle.write({
             dest: './ReactNative.js',
-            format: 'cjs',
+            format: 'es',
             sourceMap: true,
         });
     });
