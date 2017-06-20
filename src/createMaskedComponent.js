@@ -4,8 +4,6 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {createTextMaskInputElement} from 'text-mask-core';
 
-const isReactNative = window && !window.document;
-
 export default WrappedComponent =>
     class TextMask extends PureComponent {
         static propTypes = {
@@ -42,16 +40,11 @@ export default WrappedComponent =>
         textMaskInputElement;
 
         componentDidMount() {
-            if (isReactNative) document.addComponent(this.component);
             this.initTextMask();
         }
 
         componentDidUpdate() {
             this.initTextMask();
-        }
-
-        componentWillUnmount() {
-            if (isReactNative) document.removeComponent(this.component);
         }
 
         initTextMask() {

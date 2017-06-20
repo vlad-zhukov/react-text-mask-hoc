@@ -36,6 +36,7 @@ export class TextInputAdapter extends PureComponent {
     }
 
     componentWillMount() {
+        document.addComponent(this);
         this.props.componentRef(this);
     }
 
@@ -43,6 +44,10 @@ export class TextInputAdapter extends PureComponent {
         if (nextProps.value !== this.state.value) {
             this.setState({value: nextProps.value});
         }
+    }
+
+    componentWillUnmount() {
+        document.removeComponent(this);
     }
 
     setSelectionRange(start, end) {
@@ -114,6 +119,7 @@ export class TextAdapter extends PureComponent {
     }
 
     componentWillMount() {
+        document.addComponent(this);
         this.props.componentRef(this);
     }
 
@@ -121,6 +127,10 @@ export class TextAdapter extends PureComponent {
         if (nextProps.value !== this.state.value) {
             this.setState({value: nextProps.value});
         }
+    }
+
+    componentWillUnmount() {
+        document.removeComponent(this);
     }
 
     render() {
