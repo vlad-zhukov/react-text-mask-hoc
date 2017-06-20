@@ -1,9 +1,9 @@
-import {createMaskedComponent, InputAdapter, SpanAdapter} from '../dist/react-text-mask-hoc.esm';
+import * as reactBundle from '../dist/react-text-mask-hoc.esm';
 
-describe('import-bundle-cjs', () => {
-    it('should export functions', () => {
-        expect(typeof createMaskedComponent).toBe('function');
-        expect(typeof InputAdapter).toBe('function');
-        expect(typeof SpanAdapter).toBe('function');
+describe('import-bundle-esm', () => {
+    test('React bundle should export functions', () => {
+        expect(typeof reactBundle.createMaskedComponent).toBe('function');
+        expect(typeof reactBundle.InputAdapter).toBe('function');
+        expect(typeof reactBundle.SpanAdapter).toBe('function');
     });
 });
