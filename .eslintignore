@@ -1,3 +1,2 @@
 dist/*
-/React.js
-/ReactNative.js
+/ReactNative.js*

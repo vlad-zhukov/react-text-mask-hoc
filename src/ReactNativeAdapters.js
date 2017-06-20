@@ -1,28 +1,8 @@
-/* eslint-disable */
+/* eslint-disable import/no-extraneous-dependencies, react/no-multi-comp */
+
 import React, {PureComponent} from 'react';
-import {Text, TextInput, findNodeHandle} from 'react-native';
+import {Text, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
-/* eslint-enable */
-
-/* eslint-disable react/no-multi-comp */
-
-const components = {};
-
-global.document = {
-    get activeElement() {
-        const tag = TextInput.State.currentlyFocusedField();
-        if (components[tag]) return components[tag];
-        return null;
-    },
-    addComponent(component) {
-        const tag = findNodeHandle(component);
-        components[tag] = component;
-    },
-    removeComponent(component) {
-        const tag = findNodeHandle(component);
-        delete components[tag];
-    },
-};
 
 export class TextInputAdapter extends PureComponent {
     static propTypes = {

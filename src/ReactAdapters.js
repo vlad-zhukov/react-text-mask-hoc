@@ -1,9 +1,7 @@
-/* eslint-disable */
+/* eslint-disable import/no-extraneous-dependencies, react/no-multi-comp */
+
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-/* eslint-enable */
-
-/* eslint-disable react/no-multi-comp */
 
 export class InputAdapter extends PureComponent {
     static propTypes = {

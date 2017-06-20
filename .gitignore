@@ -1,4 +1,3 @@
 node_modules/
 dist/
-/React.js
-/ReactNative.js
+/ReactNative.js*

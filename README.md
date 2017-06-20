@@ -23,8 +23,7 @@ npm install --save react-text-mask-hoc
 ## Usage
 ```js
 import React, {PureComponent} from 'react';
-import createMaskedComponent from 'react-text-mask-hoc';
-import {InputAdapter} from 'react-text-mask-hoc/React';
+import {createMaskedComponent, InputAdapter} from 'react-text-mask-hoc';
 
 // You can provide your own adapter component or use one of included in the library.
 const MaskedInput = createMaskedComponent(InputAdapter);
@@ -45,7 +44,7 @@ export default class Example extends PureComponent {
                     mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
                     guide={false}
                     value={this.state.value}
-                    onChange={this.onChange}
+                    onChange={_this.onChange}
                 />
             </div>
         );
@@ -55,10 +54,11 @@ export default class Example extends PureComponent {
 
 The only difference in usage in React Native is another adapter specific to the platform is needed.
 ```js
-import createMaskedComponent from 'react-text-mask-hoc';
-import {TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
+import {createMaskedComponent, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
 
 const MaskedInput = createMaskedComponent(TextInputAdapter);
+
+// same as above
 ```
 
 ## API

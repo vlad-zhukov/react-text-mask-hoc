@@ -1,8 +1,8 @@
-/* eslint-disable */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {createTextMaskInputElement} from 'text-mask-core';
-/* eslint-enable */
 
 const isReactNative = window && !window.document;
 

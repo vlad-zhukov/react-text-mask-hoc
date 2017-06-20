@@ -1,7 +1,9 @@
-import createMaskedComponent from '../dist/react-text-mask-hoc.cjs';
+import {createMaskedComponent, InputAdapter, SpanAdapter} from '../dist/react-text-mask-hoc.cjs';
 
 describe('import-bundle-cjs', () => {
-    it('should be a function', () => {
-        expect(typeof createMaskedComponent === 'function').toBeTruthy();
+    it('should export functions', () => {
+        expect(typeof createMaskedComponent).toBe('function');
+        expect(typeof InputAdapter).toBe('function');
+        expect(typeof SpanAdapter).toBe('function');
     });
 });

@@ -12,7 +12,7 @@
   "module": "./dist/react-text-mask-hoc.esm.js",
   "jsnext:main": "./dist/react-text-mask-hoc.esm.js",
   "scripts": {
-    "build": "rimraf dist/ && rollup -c && cross-env NODE_ENV=production babel src/adapters/ -d ./",
+    "build": "rimraf dist/ ReactNative.js* && cross-env NODE_ENV=production node ./rollup.js",
     "test": "jest",
     "lint": "eslint \"**/*.js\"",
     "prettier": "prettier-eslint \"**/*.js\" --write",
@@ -23,7 +23,6 @@
     "text-mask-core": "^5.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.5.2",
