@@ -14,9 +14,9 @@
   "scripts": {
     "build": "rimraf dist/ && rollup -c && cross-env NODE_ENV=production babel src/adapters/ -d ./",
     "test": "jest",
-    "lint": "eslint '**/*.js'",
-    "prettier": "prettier-eslint --write '**/*.js'",
-    "prepublish": "yarn run lint && yarn run build && yarn run test"
+    "lint": "eslint \"**/*.js\"",
+    "prettier": "prettier-eslint \"**/*.js\" --write",
+    "prepublishOnly": "yarn run lint && yarn run build && yarn run test"
   },
   "dependencies": {
     "prop-types": "^15.5.10",
@@ -34,13 +34,13 @@
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.0.1",
+    "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
-    "prettier-eslint-cli": "^4.0.4",
-    "react": "^15.5.4",
-    "react-native": "^0.44.3",
+    "prettier-eslint-cli": "^4.1.1",
+    "react": "^15.6.1",
+    "react-native": "^0.45.1",
     "rimraf": "^2.6.1",
-    "rollup": "^0.42.0",
+    "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1"
   },
   "peerDependencies": {
