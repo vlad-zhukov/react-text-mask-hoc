@@ -1,7 +1,9 @@
+/* eslint-disable no-underscore-dangle, react/prop-types */
+
 import React, {Component} from 'react';
 import {mount} from 'enzyme';
-import {createMaskedComponent, InputAdapter} from '../src/index';
 import emailMask from 'text-mask-addons/dist/emailMask';
+import {createMaskedComponent, InputAdapter} from '../src/index';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -105,10 +107,13 @@ describe('InputAdapter', () => {
     });
 
     it('accepts function as mask property', () => {
-        const {input} = setup({value: '12345', mask: (value) => {
-            expect(value).toBe('12345');
-            return PHONE_MASK;
-        }});
+        const {input} = setup({
+            value: '12345',
+            mask: (value) => {
+                expect(value).toBe('12345');
+                return PHONE_MASK;
+            },
+        });
 
         expect(input.getDOMNode().value).toBe('(123) 45_-____');
     });
@@ -120,10 +125,13 @@ describe('InputAdapter', () => {
     });
 
     it('accepts pipe function', () => {
-        const {input} = setup({value: '12345', pipe: (value) => {
-            expect(value).toBe('(123) 45_-____');
-            return 'abc';
-        }});
+        const {input} = setup({
+            value: '12345',
+            pipe: (value) => {
+                expect(value).toBe('(123) 45_-____');
+                return 'abc';
+            },
+        });
 
         expect(input.getDOMNode().value).toBe('abc');
     });

@@ -12,7 +12,7 @@
   "module": "./dist/react-text-mask-hoc.esm.js",
   "jsnext:main": "./dist/react-text-mask-hoc.esm.js",
   "scripts": {
-    "build": "rimraf dist/ ReactNative.* && cross-env NODE_ENV=production node ./rollup.js",
+    "build": "rimraf dist/ && cross-env NODE_ENV=production node ./rollup.js",
     "test": "jest",
     "lint": "eslint \"**/*.js\"",
     "prettier": "prettier-eslint \"**/*.js\" --write",

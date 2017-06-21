@@ -34,7 +34,7 @@ rollup
     })
     .then((bundle) => {
         bundle.write({
-            dest: './ReactNative.js',
+            dest: './dist/react-text-mask-hoc.ReactNative.js',
             format: 'es',
             sourceMap: true,
         });
