@@ -66,6 +66,7 @@ const MaskedInput = createMaskedComponent(TextInputAdapter);
 ## Examples
 
 - [React](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/react-app/)
+- [React Native](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/ReactNativeApp/)
 
 ## API
 

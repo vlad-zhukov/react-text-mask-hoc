@@ -1,0 +1,20 @@
+{
+  "name": "ReactNativeApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "haul start",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.45.1",
+    "react-text-mask-hoc": "^0.2.2"
+  },
+  "devDependencies": {
+    "babel-preset-react-native": "2.0.0",
+    "core-js": "^2.4.1",
+    "haul": "^1.0.0-beta.1"
+  }
+}

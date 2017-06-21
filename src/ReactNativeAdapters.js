@@ -36,8 +36,11 @@ export class TextInputAdapter extends PureComponent {
     }
 
     componentWillMount() {
-        document.addComponent(this);
         this.props.componentRef(this);
+    }
+
+    componentDidMount() {
+        document.addComponent(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -119,8 +122,11 @@ export class TextAdapter extends PureComponent {
     }
 
     componentWillMount() {
-        document.addComponent(this);
         this.props.componentRef(this);
+    }
+
+    componentDidMount() {
+        document.addComponent(this);
     }
 
     componentWillReceiveProps(nextProps) {
