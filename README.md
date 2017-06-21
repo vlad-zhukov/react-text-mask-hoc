@@ -1,8 +1,9 @@
-react-text-mask-hoc · [![npm](https://img.shields.io/npm/v/react-text-mask-hoc.svg)](https://npm.im/react-text-mask-hoc)
-===================
+# react-text-mask-hoc · [![npm](https://img.shields.io/npm/v/react-text-mask-hoc.svg)](https://npm.im/react-text-mask-hoc)
+
 > A higher-order [text-mask](https://github.com/text-mask/text-mask) component for [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/).
 
 ## Table of Contents
+
 - [Install](#install)
 - [Usage](#usage)
 - [API](#api)
@@ -12,16 +13,16 @@ react-text-mask-hoc · [![npm](https://img.shields.io/npm/v/react-text-mask-hoc.
     - for React Native: [`TextInputAdapter`](#textinputadapter) and [`TextAdapter`](#textadapter)
 
 ## Install
-```sh
+
+```bash
 yarn add react-text-mask-hoc
-```
-or
-```sh
+  # or
 npm install --save react-text-mask-hoc
 ```
 
 ## Usage
-```js
+
+```jsx
 import React, {PureComponent} from 'react';
 import {createMaskedComponent, InputAdapter} from 'react-text-mask-hoc';
 
@@ -52,8 +53,8 @@ export default class Example extends PureComponent {
 }
 ```
 
-The only difference in usage in React Native is another adapter specific to the platform is needed.
-```js
+For React Native import another file:
+```jsx
 import {createMaskedComponent, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
 
 const MaskedInput = createMaskedComponent(TextInputAdapter);
@@ -64,17 +65,21 @@ const MaskedInput = createMaskedComponent(TextInputAdapter);
 ## API
 
 ### `createMaskedComponent(AdaptedComponent)`
+
 A [HOC](https://facebook.github.io/react/docs/higher-order-components.html) granting `text-mask` functionality to the wrapped component.
 
 __Arguments__
+
 - `AdaptedComponent` _(React.Component)_: A React component that follows the [adapter](#adapters) specification.
 
 ---
 
 ### Adapters
+
 Adapters are React components that implement a special interface for the [`createMaskedComponent`](#createmaskedcomponentwrappedcomponent).
 
 List of adapters included in this library:
+
 - for React
   - `InputAdapter`
   - `SpanAdapter`
