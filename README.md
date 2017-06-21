@@ -6,6 +6,7 @@
 
 - [Install](#install)
 - [Usage](#usage)
+- [Examples](#examples)
 - [API](#api)
   - [`createMaskedComponent`](#createmaskedcomponentwrappedcomponent)
   - [Adapters](#adapters)
@@ -61,6 +62,10 @@ const MaskedInput = createMaskedComponent(TextInputAdapter);
 
 // same as above
 ```
+
+## Examples
+
+- [React](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/react-app/)
 
 ## API
 
