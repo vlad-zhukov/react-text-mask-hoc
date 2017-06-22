@@ -12,6 +12,7 @@
   - [Adapters](#adapters)
     - for React: [`InputAdapter`](#inputadapter) and [`SpanAdapter`](#spanadapter)
     - for React Native: [`TextInputAdapter`](#textinputadapter) and [`TextAdapter`](#textadapter)
+  - [`TextMaskElement`](#textmaskelement)
 
 ## Install
 
@@ -81,5 +82,13 @@ List of adapters included in this library:
 - for React Native
   - `TextInputAdapter`
   - `TextAdapter`
+
+---
+
+### `TextMaskElement`
+
+A class that calculates a value and caret position. Based on `createTextMaskInputElement()` from the [`text-mask-core`](https://github.com/text-mask/text-mask/tree/master/core).
+
+Exported for testing purposes only.
 
 ---
