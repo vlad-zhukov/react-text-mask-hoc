@@ -5,5 +5,6 @@ describe('import-bundle-cjs-as-esm', () => {
         expect(typeof reactBundle.createMaskedComponent).toBe('function');
         expect(typeof reactBundle.InputAdapter).toBe('function');
         expect(typeof reactBundle.SpanAdapter).toBe('function');
+        expect(typeof reactBundle.TextMaskElement).toBe('function');
     });
 });

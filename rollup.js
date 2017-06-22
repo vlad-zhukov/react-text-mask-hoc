@@ -2,10 +2,11 @@
 
 const rollup = require('rollup');
 const babel = require('rollup-plugin-babel');
+const resolve = require('rollup-plugin-node-resolve');
 const pkg = require('./package.json');
 
-const plugins = [babel()];
-const external = ['react', 'react-native', 'prop-types', 'text-mask-core'];
+const plugins = [resolve(), babel()];
+const external = ['react', 'react-native', 'prop-types'];
 
 rollup
     .rollup({

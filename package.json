@@ -19,8 +19,7 @@
     "prepublishOnly": "yarn run lint && yarn run build && yarn run test"
   },
   "dependencies": {
-    "prop-types": "^15.5.10",
-    "text-mask-core": "^5.0.1"
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -29,10 +28,10 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.0.1",
-    "enzyme": "^2.8.2",
+    "enzyme": "^2.9.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-import": "^2.5.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
@@ -44,7 +43,9 @@
     "rimraf": "^2.6.1",
     "rollup": "^0.43.0",
     "rollup-plugin-babel": "^2.7.1",
-    "text-mask-addons": "^3.6.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "text-mask-addons": "^3.6.0",
+    "text-mask-core": "^5.0.1"
   },
   "peerDependencies": {
     "react": ">=15"
@@ -73,6 +74,7 @@
   "jest": {
     "roots": [
       "<rootDir>/__tests__/"
-    ]
+    ],
+    "transformIgnorePatterns": ["/node_modules((?!text-mask-core).)*$/"]
   }
 }

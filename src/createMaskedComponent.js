@@ -2,7 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {createTextMaskInputElement} from 'text-mask-core';
+import TextMaskElement from './TextMaskElement';
 
 export default WrappedComponent =>
     class TextMask extends PureComponent {
@@ -16,8 +16,8 @@ export default WrappedComponent =>
                     pipe: PropTypes.func,
                 }),
             ]).isRequired,
-            guide: PropTypes.bool,
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            guide: PropTypes.bool,
             pipe: PropTypes.func,
             placeholderChar: PropTypes.string,
             keepCharPositions: PropTypes.bool,
@@ -27,8 +27,8 @@ export default WrappedComponent =>
         };
 
         static defaultProps = {
-            guide: true,
             value: '',
+            guide: true,
             pipe: null,
             placeholderChar: '_',
             keepCharPositions: false,
@@ -37,21 +37,45 @@ export default WrappedComponent =>
             componentRef: () => {},
         };
 
-        textMaskInputElement;
+        constructor(props, context) {
+            super(props, context);
 
-        componentDidMount() {
-            this.initTextMask();
+            this.component = null;
+            this.textMaskElement = null;
+
+            this.textMaskElement = new TextMaskElement();
+            const nextUpdate = this._update(this.props);
+
+            if (nextUpdate !== null) {
+                this.state = {
+                    value: nextUpdate.value,
+                    caretPosition: nextUpdate.caretPosition,
+                };
+            }
+            else {
+                this.state = {
+                    value: '',
+                    caretPosition: 0,
+                };
+            }
         }
 
-        componentDidUpdate() {
-            this.initTextMask();
+        componentWillReceiveProps(nextProps) {
+            const nextUpdate = this._update(nextProps);
+            if (nextUpdate !== null) this.setState(nextUpdate);
         }
 
-        initTextMask() {
-            const {value, ...rest} = this.props;
-            this.textMaskInputElement = createTextMaskInputElement({inputElement: this.component, ...rest});
-            this.textMaskInputElement.update(value);
-        }
+        _update = props =>
+            this.textMaskElement.update({
+                value: props.value,
+                caretPosition: this.component != null ? this.component.caretPosition : 0,
+                mask: props.mask,
+                guide: props.guide,
+                pipe: props.pipe,
+                placeholderChar: props.placeholderChar,
+                keepCharPositions: props.keepCharPositions,
+                showMask: props.showMask,
+            });
 
         _getRef = (comp) => {
             if (comp) {
@@ -62,34 +86,49 @@ export default WrappedComponent =>
 
         _onChange = (event) => {
             if (event) {
-                this.textMaskInputElement.update();
+                const rawValue = event.target != null && typeof event.target === 'object'
+                    ? event.target.value
+                    : event.text;
+                const nextUpdate = this._update({...this.props, value: rawValue});
+                if (nextUpdate !== null) {
+                    this.setState(nextUpdate);
+                }
                 this.props.onChange(event);
             }
         };
 
         render() {
             const {
+                value,
                 mask,
                 guide,
                 pipe,
                 placeholderChar,
                 keepCharPositions,
-                onChange,
                 showMask,
                 componentRef,
+                onChange,
                 ...rest
             } = this.props;
 
-            return <WrappedComponent {...rest} onChange={this._onChange} componentRef={this._getRef} />;
+            return (
+                <WrappedComponent
+                    {...rest}
+                    value={this.state.value}
+                    caretPosition={this.state.caretPosition}
+                    onChange={this._onChange}
+                    ref={this._getRef}
+                />
+            );
         }
 
         // Callback input functions.
 
-        focus() {
-            this.component.focus();
-        }
-
-        blur() {
-            this.component.blur();
-        }
+        // focus() {
+        //     this.component.focus();
+        // }
+        //
+        // blur() {
+        //     this.component.blur();
+        // }
     };

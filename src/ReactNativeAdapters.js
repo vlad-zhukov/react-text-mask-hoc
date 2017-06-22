@@ -7,54 +7,16 @@ import PropTypes from 'prop-types';
 export class TextInputAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.string.isRequired,
-        componentRef: PropTypes.func.isRequired,
+        caretPosition: PropTypes.number.isRequired,
         onChange: PropTypes.func.isRequired,
     };
 
-    _lastOnChangeEvent; // eslint-disable-line react/sort-comp
+    _lastOnChangeEvent;
     _selection;
     _wait = false;
 
-    state = {
-        value: this.props.value,
-    };
-
-    get value() {
-        return this.state.value;
-    }
-
-    set value(value) {
-        this.setState({value});
-    }
-
-    get selectionStart() {
-        return this._selection ? this._selection.start : 0;
-    }
-
-    get selectionEnd() {
+    get caretPosition() {
         return this._selection ? this._selection.end : 0;
-    }
-
-    componentWillMount() {
-        this.props.componentRef(this);
-    }
-
-    componentDidMount() {
-        document.addComponent(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.state.value) {
-            this.setState({value: nextProps.value});
-        }
-    }
-
-    componentWillUnmount() {
-        document.removeComponent(this);
-    }
-
-    setSelectionRange(start, end) {
-        this._selection = {start, end};
     }
 
     _getRef = (ref) => {
@@ -73,11 +35,11 @@ export class TextInputAdapter extends PureComponent {
             this._wait = false;
         }, 100);
 
-        // onChange() is called before onSelectionChange(), so when text-mask gets selection
+        // onChange() runs before onSelectionChange(), so when text-mask gets selection
         // it's a previous value instead of the current one.
 
         this._selection = nativeEvent.selection;
-        if (this._lastOnChangeEvent && this._lastOnChangeEvent.text !== this.state.value) {
+        if (this._lastOnChangeEvent && this._lastOnChangeEvent.text !== this.props.value) {
             this.props.onChange(this._lastOnChangeEvent);
             this._lastOnChangeEvent = null;
         }
@@ -87,16 +49,15 @@ export class TextInputAdapter extends PureComponent {
     };
 
     render() {
-        const {value, componentRef, onChange, ...rest} = this.props;
+        const {caretPosition, onChange, ...rest} = this.props;
 
         return (
             <TextInput
+                {...rest}
                 ref={this._getRef}
-                value={this.state.value}
-                selection={this._selection}
+                selection={{start: caretPosition, end: caretPosition}}
                 onChange={this._onChange}
                 onSelectionChange={this._onSelectionChange}
-                {...rest}
             />
         );
     }
@@ -105,43 +66,18 @@ export class TextInputAdapter extends PureComponent {
 export class TextAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.string.isRequired,
-        componentRef: PropTypes.func.isRequired,
+        caretPosition: PropTypes.number.isRequired,
         onChange: PropTypes.func.isRequired,
     };
 
-    state = {
-        value: this.props.value,
-    };
-
-    get value() {
-        return this.state.value;
-    }
-
-    set value(value) {
-        this.setState({value});
-    }
-
-    componentWillMount() {
-        this.props.componentRef(this);
-    }
-
-    componentDidMount() {
-        document.addComponent(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.state.value) {
-            this.setState({value: nextProps.value});
-        }
-    }
-
-    componentWillUnmount() {
-        document.removeComponent(this);
+    // eslint-disable-next-line class-methods-use-this
+    get caretPosition() {
+        return 0;
     }
 
     render() {
-        const {value, componentRef, onChange, ...rest} = this.props;
+        const {value, caretPosition, onChange, ...rest} = this.props;
 
-        return <Text {...rest}>{this.state.value}</Text>;
+        return <Text {...rest}>{value}</Text>;
     }
 }

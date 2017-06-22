@@ -5,54 +5,53 @@ import PropTypes from 'prop-types';
 
 export class InputAdapter extends PureComponent {
     static propTypes = {
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        componentRef: PropTypes.func.isRequired,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        caretPosition: PropTypes.number.isRequired,
         onChange: PropTypes.func.isRequired,
     };
 
-    static defaultProps = {
-        value: '',
+    componentDidMount() {
+        this._setCaretPosition();
+    }
+
+    componentDidUpdate() {
+        this._setCaretPosition();
+    }
+
+    get caretPosition() {
+        return this.input.selectionEnd;
+    }
+
+    _getRef = (ref) => {
+        this.input = ref;
+    };
+
+    _setCaretPosition = () => {
+        this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
     };
 
     render() {
-        const {componentRef, ...rest} = this.props;
+        const {caretPosition, ...rest} = this.props;
 
-        return <input ref={componentRef} {...rest} />;
+        return <input ref={this._getRef} {...rest} />;
     }
 }
 
 export class SpanAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        componentRef: PropTypes.func.isRequired,
+        caretPosition: PropTypes.number.isRequired,
         onChange: PropTypes.func.isRequired,
     };
 
-    state = {
-        value: this.props.value,
-    };
-
-    componentWillMount() {
-        this.props.componentRef(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.state.value) {
-            this.setState({value: nextProps.value});
-        }
-    }
-
-    get value() {
-        return this.state.value;
-    }
-
-    set value(value) {
-        this.setState({value});
+    // eslint-disable-next-line class-methods-use-this
+    get caretPosition() {
+        return 0;
     }
 
     render() {
-        const {value, componentRef, onChange, ...rest} = this.props;
+        const {value, caretPosition, onChange, ...rest} = this.props;
 
-        return <span {...rest}>{this.state.value}</span>;
+        return <span {...rest}>{value}</span>;
     }
 }

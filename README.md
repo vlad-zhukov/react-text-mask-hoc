@@ -31,24 +31,13 @@ import {createMaskedComponent, InputAdapter} from 'react-text-mask-hoc';
 const MaskedInput = createMaskedComponent(InputAdapter);
 
 export default class Example extends PureComponent {
-    state = {
-        value: '5554953947',
-    };
-
-    _onChange = (event) => {
-        this.setState({value: event.target.value});
-    }
-
     render() {
         return (
-            <div>
-                <MaskedInput
-                    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                    guide={false}
-                    value={this.state.value}
-                    onChange={_this.onChange}
-                />
-            </div>
+            <MaskedInput
+                mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                guide={false}
+                value="5554953947"
+            />
         );
     }
 }
@@ -59,20 +48,20 @@ For React Native import another file:
 import {createMaskedComponent, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
 
 const MaskedInput = createMaskedComponent(TextInputAdapter);
-
-// same as above
 ```
 
 ## Examples
 
-- [React](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/react-app/)
-- [React Native](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/ReactNativeApp/)
+- [React](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/reactapp/)
+- [React Native](https://github.com/Vlad-Zhukov/react-text-mask-hoc/tree/master/examples/reactnativeapp/)
 
 ## API
 
 ### `createMaskedComponent(AdaptedComponent)`
 
 A [HOC](https://facebook.github.io/react/docs/higher-order-components.html) granting `text-mask` functionality to the wrapped component.
+
+It's a controlled component and it maintains its own state, however it can also be controlled with props.
 
 __Arguments__
 

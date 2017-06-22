@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {mount} from 'enzyme';
-import emailMask from 'text-mask-addons/dist/emailMask';
+import {emailMask} from 'text-mask-addons';
 import {createMaskedComponent, InputAdapter} from '../src/index';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
@@ -38,7 +38,7 @@ function setup(options = {}) {
             return (
                 <MaskedInput
                     {...rest}
-                    value={this.state.value}
+                    {...this.state}
                     onChange={this._onChange}
                     componentRef={this._componentRef}
                     ref={this._getRef}
@@ -88,18 +88,16 @@ describe('InputAdapter', () => {
         const wrapperInstance = wrapper.instance();
 
         expect(wrapperInstance._componentRef).toHaveBeenCalledTimes(1);
-        expect(wrapperInstance._component).toBeInstanceOf(HTMLInputElement);
+        expect(wrapperInstance._component).toBeInstanceOf(InputAdapter);
     });
 
-    it('initializes textMaskInputElement property', () => {
+    it('initializes textMaskElement property', () => {
         const {wrapper} = setup();
         const maskedInput = wrapper.instance()._ref;
 
-        expect(maskedInput.textMaskInputElement).toBeDefined();
-        expect(typeof maskedInput.textMaskInputElement).toBe('object');
-        expect(typeof maskedInput.textMaskInputElement.state).toBe('object');
-        expect(typeof maskedInput.textMaskInputElement.state.previousConformedValue).toBe('string');
-        expect(typeof maskedInput.textMaskInputElement.update).toBe('function');
+        expect(maskedInput.textMaskElement).toBeDefined();
+        expect(typeof maskedInput.textMaskElement).toBe('object');
+        expect(typeof maskedInput.textMaskElement.update).toBe('function');
     });
 
     it('throws if mask property was not set', () => {
@@ -160,16 +158,6 @@ describe('InputAdapter', () => {
         expect(input.getDOMNode().value).toBe('');
     });
 
-    it('creates a new textMaskInputElement when initTextMask() is called', () => {
-        const {wrapper} = setup();
-        const maskedInput = wrapper.instance()._ref;
-        const cachedTextMaskInputElement = maskedInput.textMaskInputElement;
-
-        maskedInput.initTextMask();
-
-        expect(cachedTextMaskInputElement).not.toBe(maskedInput.textMaskInputElement);
-    });
-
     it('does not render masked characters', () => {
         const {input} = setup({value: 'abc'});
 
@@ -177,79 +165,68 @@ describe('InputAdapter', () => {
     });
 
     it('does not allow masked characters', () => {
-        const {input} = setup();
+        const {wrapper, input} = setup();
         const inputElement = input.getDOMNode();
 
         expect(inputElement.value).toBe('');
-        input.node.value = 'abc';
-        input.simulate('change');
+        wrapper.setState({value: 'abc'});
         expect(inputElement.value).toBe('');
     });
 
     it('can be disabled by setting the mask to false', () => {
-        const {input} = setup({value: 'abc', mask: false});
+        const {wrapper, input} = setup({value: 'abc', mask: false});
         const inputElement = input.getDOMNode();
 
         expect(inputElement.value).toBe('abc');
-        input.node.value = 'def';
-        input.simulate('change');
-        expect(input.getDOMNode().value).toBe('def');
+        wrapper.setState({value: 'def'});
+        expect(inputElement.value).toBe('def');
     });
 
-    it('can call textMaskInputElement.update() to update the inputElement.value', () => {
-        const {wrapper, input} = setup();
-        const maskedInput = wrapper.instance()._ref;
-        const inputElement = input.getDOMNode();
-
-        expect(inputElement.value).toBe('');
-        inputElement.value = '12345';
-        maskedInput.textMaskInputElement.update();
-        expect(inputElement.value).toBe('(123) 45_-____');
-    });
-
-    it('can pass value to textMaskInputElement.update()', () => {
+    it('updates the value with a value prop', () => {
         const {wrapper, input} = setup({value: '123'});
-        const maskedInput = wrapper.instance()._ref;
         const inputElement = input.getDOMNode();
 
         expect(inputElement.value).toBe('(123) ___-____');
-        maskedInput.textMaskInputElement.update('12345');
+        wrapper.setState({value: '12345'});
         expect(inputElement.value).toBe('(123) 45_-____');
     });
 
-    it('can pass textMaskConfig to textMaskInputElement.update()', () => {
+    it('updates the mask with a mask prop', () => {
         const {wrapper, input} = setup({value: '123', mask: false});
-        const maskedInput = wrapper.instance()._ref;
         const inputElement = input.getDOMNode();
 
         expect(inputElement.value).toBe('123');
-        maskedInput.textMaskInputElement.update('12345', {inputElement, mask: PHONE_MASK});
+        wrapper.setState({value: '12345', mask: PHONE_MASK});
         expect(inputElement.value).toBe('(123) 45_-____');
     });
 
-    it('calls textMaskInputElement.update() and props.onChange() when an input event is received', () => {
+    it('calls textMaskElement.update() and props.onChange() when an input event is received', () => {
         const {wrapper, input} = setup();
         const wrapperInstance = wrapper.instance();
         const maskedInput = wrapperInstance._ref;
+        const inputElement = input.getDOMNode();
 
-        const updateSpy = jest.spyOn(maskedInput.textMaskInputElement, 'update');
-        input.simulate('change');
+        const updateSpy = jest.spyOn(maskedInput.textMaskElement, 'update');
+        input.simulate('change', {target: {value: '123'}});
 
+        expect(inputElement.value).toBe('(123) ___-____');
         expect(wrapperInstance._onChange).toHaveBeenCalledTimes(1);
-        expect(updateSpy).toHaveBeenCalledTimes(1);
+        expect(updateSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('calls textMaskInputElement.update() when an input event is received when props.onChange() is not set', () => {
+    it('calls textMaskElement.update() when an input event is received when props.onChange() is not set', () => {
         const {wrapper, input} = setup();
         const wrapperInstance = wrapper.instance();
         const maskedInput = wrapperInstance._ref;
+        const inputElement = input.getDOMNode();
 
-        const updateSpy = jest.spyOn(maskedInput.textMaskInputElement, 'update');
+        const updateSpy = jest.spyOn(maskedInput.textMaskElement, 'update');
         wrapperInstance._onChange = undefined;
-        input.simulate('change');
+        input.simulate('change', {target: {value: '123'}});
 
+        expect(inputElement.value).toBe('(123) ___-____');
         expect(wrapperInstance._onChange).not.toBeDefined();
-        expect(updateSpy).toHaveBeenCalledTimes(1);
+        expect(updateSpy).toHaveBeenCalledTimes(2);
     });
 
     it('calls textMaskInputElement.update() via onChange()', () => {
@@ -257,7 +234,7 @@ describe('InputAdapter', () => {
         const maskedInput = wrapper.instance()._ref;
         const inputElement = input.getDOMNode();
 
-        const updateSpy = jest.spyOn(maskedInput.textMaskInputElement, 'update');
+        const updateSpy = jest.spyOn(maskedInput.textMaskElement, 'update');
 
         expect(inputElement.value).toBe('(123) ___-____');
         expect(updateSpy).toHaveBeenCalledTimes(0);
@@ -265,6 +242,6 @@ describe('InputAdapter', () => {
         maskedInput._onChange({target: {value: '12345'}});
 
         expect(inputElement.value).toBe('(123) 45_-____');
-        expect(updateSpy).toHaveBeenCalledTimes(1);
+        expect(updateSpy).toHaveBeenCalledTimes(2);
     });
 });
