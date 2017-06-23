@@ -33,7 +33,7 @@ export class InputAdapter extends PureComponent {
     render() {
         const {caretPosition, ...rest} = this.props;
 
-        return <input ref={this._getRef} {...rest} />;
+        return <input ref={this._getRef} type="text" {...rest} />;
     }
 }
 
