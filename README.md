@@ -1,6 +1,24 @@
 # react-text-mask-hoc · [![npm](https://img.shields.io/npm/v/react-text-mask-hoc.svg)](https://npm.im/react-text-mask-hoc)
 
-> A higher-order [text-mask](https://github.com/text-mask/text-mask) component for [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/).
+> A higher-order [text-mask](https://github.com/text-mask/text-mask)
+component for [React](https://facebook.github.io/react/) and
+[React Native](https://facebook.github.io/react-native/).
+
+`text-mask` is great. It's a feature-rich solution for creating input
+masks for various libraries and framework. However the React
+implementation has some long-standing bugs and feature requests that
+hide the full potential of the library. `react-text-mask-hoc` is a
+successful attempt to release the full power of `text-mask` and React.
+
+__Features:__
+
+- Supports all features from `text-mask`, see its
+[documentation](https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md)
+for more information.
+- __Custom components:__ you can use any components from other libraries
+through a simple [adapter](#adapters) interface!
+- __Platform agnostic:__ works in all browsers, React Native and Node.js
+(useful for server-side rendering)!
 
 ## Table of Contents
 
@@ -10,8 +28,10 @@
 - [API](#api)
   - [`createMaskedComponent`](#createmaskedcomponentwrappedcomponent)
   - [Adapters](#adapters)
-    - for React: [`InputAdapter`](#inputadapter) and [`SpanAdapter`](#spanadapter)
-    - for React Native: [`TextInputAdapter`](#textinputadapter) and [`TextAdapter`](#textadapter)
+    - for React: [`InputAdapter`](#inputadapter) and
+    [`SpanAdapter`](#spanadapter)
+    - for React Native: [`TextInputAdapter`](#textinputadapter) and
+    [`TextAdapter`](#textadapter)
   - [`TextMaskElement`](#textmaskelement)
 
 ## Install
@@ -44,7 +64,8 @@ export default class Example extends PureComponent {
 }
 ```
 
-For React Native import another file:
+For React Native import `react-text-mask-hoc/ReactNative` instead:
+
 ```jsx
 import {createMaskedComponent, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
 
@@ -60,19 +81,31 @@ const MaskedInput = createMaskedComponent(TextInputAdapter);
 
 ### `createMaskedComponent(AdaptedComponent)`
 
-A [HOC](https://facebook.github.io/react/docs/higher-order-components.html) granting `text-mask` functionality to the wrapped component.
+A [HOC](https://facebook.github.io/react/docs/higher-order-components.html)
+granting `text-mask` functionality to the wrapped component.
 
-It's a controlled component and it maintains its own state, however it can also be controlled with props.
+It's a controlled component and it maintains its own state, however
+it can also be controlled with props.
 
 __Arguments__
 
-- `AdaptedComponent` _(React.Component)_: A React component that follows the [adapter](#adapters) specification.
+- `AdaptedComponent` _(React.Component)_: A React component that follows
+the [adapter](#adapters) specification.
+
+__Returns__
+
+A React component.
+
+__Props__
+
+See [the source code](https://github.com/Vlad-Zhukov/react-text-mask-hoc/blob/master/src/createMaskedComponent.js)
 
 ---
 
 ### Adapters
 
-Adapters are React components that implement a special interface for the [`createMaskedComponent`](#createmaskedcomponentwrappedcomponent).
+Adapters are React components that implement a special interface for the
+[`createMaskedComponent`](#createmaskedcomponentwrappedcomponent).
 
 List of adapters included in this library:
 
@@ -83,11 +116,18 @@ List of adapters included in this library:
   - `TextInputAdapter`
   - `TextAdapter`
 
+__Specification__
+
+An adapter must be a React component that takes `value`, `caretPosition`
+and `onChange` props, and exposes a `caretPosition` getter that always
+returns a positive integer number.
+
 ---
 
 ### `TextMaskElement`
 
-A class that calculates a value and caret position. Based on `createTextMaskInputElement()` from the [`text-mask-core`](https://github.com/text-mask/text-mask/tree/master/core).
+A class that calculates a value and caret position. Based on the
+`createTextMaskInputElement()` from [`text-mask-core`](https://github.com/text-mask/text-mask/tree/master/core).
 
 Exported for testing purposes only.
 
