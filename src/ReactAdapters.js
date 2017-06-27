@@ -22,12 +22,12 @@ export class InputAdapter extends PureComponent {
         return this.input.selectionEnd;
     }
 
+    _setCaretPosition() {
+        this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
+    }
+
     _getRef = (ref) => {
         this.input = ref;
-    };
-
-    _setCaretPosition = () => {
-        this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
     };
 
     render() {

@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const rollup = require('rollup');
-const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const babel = require('rollup-plugin-babel');
 const pkg = require('./package.json');
 
-const plugins = [resolve(), babel()];
+const plugins = [resolve(), commonjs(), babel()];
 const external = ['react', 'react-native', 'prop-types'];
 
 rollup

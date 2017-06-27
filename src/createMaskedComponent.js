@@ -1,11 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import TextMaskElement from './TextMaskElement';
+import {getDisplayName, type} from './helpers';
 
 export default WrappedComponent =>
-    class TextMask extends PureComponent {
+    class TextMask extends Component {
+        static displayName = `TextMask(${getDisplayName(WrappedComponent)})`;
+
         static propTypes = {
             mask: PropTypes.oneOfType([
                 PropTypes.array,
@@ -86,13 +89,12 @@ export default WrappedComponent =>
 
         _onChange = (event) => {
             if (event) {
-                const rawValue = event.target != null && typeof event.target === 'object'
-                    ? event.target.value
-                    : event.text;
+                const rawValue = type(event.target) === 'object' ? event.target.value : event.text;
                 const nextUpdate = this._update({...this.props, value: rawValue});
-                if (nextUpdate !== null) {
-                    this.setState(nextUpdate);
-                }
+
+                if (nextUpdate !== null) this.setState(nextUpdate);
+                else this.forceUpdate();
+
                 this.props.onChange(event);
             }
         };
