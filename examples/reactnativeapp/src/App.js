@@ -30,6 +30,7 @@ export default class ReactNativeApp extends PureComponent {
                         value={this.state.value}
                         onChange={this._onChange}
                         style={styles.FieldInput}
+                        maxLength={phoneMask.length}
                     />
                 </View>
                 <View style={styles.Field}>
