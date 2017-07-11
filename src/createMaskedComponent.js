@@ -47,7 +47,7 @@ export default WrappedComponent =>
             this.textMaskElement = null;
 
             this.textMaskElement = new TextMaskElement();
-            const nextUpdate = this._update(this.props);
+            const nextUpdate = this._update(props);
 
             if (nextUpdate !== null) {
                 this.state = {
