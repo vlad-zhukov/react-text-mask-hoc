@@ -37,10 +37,8 @@ export default function createMaskedComponent(WrappedComponent) {
             placeholderChar: '_',
             keepCharPositions: false,
             showMask: false,
-            onChange: () => {
-            },
-            componentRef: () => {
-            },
+            onChange: () => {},
+            componentRef: () => {},
         };
 
         constructor(props, context) {

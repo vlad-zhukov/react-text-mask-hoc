@@ -145,6 +145,10 @@ export class TextAdapter extends PureComponent {
     render() {
         const {value, caretPosition, onChange, ...rest} = this.props;
 
-        return <Text {...rest}>{value}</Text>;
+        return (
+            <Text {...rest}>
+                {value}
+            </Text>
+        );
     }
 }

@@ -19,7 +19,9 @@ export default class App extends PureComponent {
         return (
             <form className="form-horizontal">
                 <div className="form-group">
-                    <label htmlFor="1" className="col-sm-4 control-label">Phone Number</label>
+                    <label htmlFor="1" className="col-sm-4 control-label">
+                        Phone Number
+                    </label>
                     <div className="col-sm-3">
                         <MaskedInput
                             mask={phoneMask}
