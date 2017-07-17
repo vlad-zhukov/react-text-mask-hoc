@@ -124,13 +124,11 @@ export default WrappedComponent =>
             );
         }
 
-        // Callback input functions.
+        focus() {
+            this.component.focus();
+        }
 
-        // focus() {
-        //     this.component.focus();
-        // }
-        //
-        // blur() {
-        //     this.component.blur();
-        // }
+        blur() {
+            this.component.blur();
+        }
     };
