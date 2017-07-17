@@ -101,11 +101,11 @@ export default function createMaskedComponent(WrappedComponent) {
         };
 
         focus() {
-            this.component.focus();
+            if (this.component.input) this.component.input.focus();
         }
 
         blur() {
-            this.component.blur();
+            if (this.component.input) this.component.input.blur();
         }
 
         render() {
