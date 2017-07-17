@@ -6,7 +6,7 @@ import hoistStatics from 'hoist-non-react-statics';
 import TextMaskElement from './TextMaskElement';
 import {getDisplayName, type} from './helpers';
 
-export default WrappedComponent => {
+export default function createMaskedComponent(WrappedComponent) {
     class TextMask extends Component {
         static displayName = `TextMask(${getDisplayName(WrappedComponent)})`;
 
@@ -102,6 +102,14 @@ export default WrappedComponent => {
             }
         };
 
+        focus() {
+            this.component.focus();
+        }
+
+        blur() {
+            this.component.blur();
+        }
+
         render() {
             const {
                 value,
@@ -126,15 +134,7 @@ export default WrappedComponent => {
                 />
             );
         }
-
-        focus() {
-            this.component.focus();
-        }
-
-        blur() {
-            this.component.blur();
-        }
     }
 
     return hoistStatics(TextMask, WrappedComponent);
-};
+}
