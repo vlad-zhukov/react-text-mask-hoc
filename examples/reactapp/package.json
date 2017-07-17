@@ -9,9 +9,9 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-text-mask-hoc": "^0.3.0"
+    "react-text-mask-hoc": "^0.4.1"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "react-scripts": "^1.0.10"
   }
 }
