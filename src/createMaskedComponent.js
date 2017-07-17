@@ -2,10 +2,11 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import hoistStatics from 'hoist-non-react-statics';
 import TextMaskElement from './TextMaskElement';
 import {getDisplayName, type} from './helpers';
 
-export default WrappedComponent =>
+export default WrappedComponent => {
     class TextMask extends Component {
         static displayName = `TextMask(${getDisplayName(WrappedComponent)})`;
 
@@ -36,8 +37,10 @@ export default WrappedComponent =>
             placeholderChar: '_',
             keepCharPositions: false,
             showMask: false,
-            onChange: () => {},
-            componentRef: () => {},
+            onChange: () => {
+            },
+            componentRef: () => {
+            },
         };
 
         constructor(props, context) {
@@ -131,4 +134,7 @@ export default WrappedComponent =>
         blur() {
             this.component.blur();
         }
-    };
+    }
+
+    return hoistStatics(TextMask, WrappedComponent);
+};
