@@ -69,6 +69,10 @@ export default function createMaskedComponent(WrappedComponent) {
             if (nextUpdate !== null) this.setState(nextUpdate);
         }
 
+        get value() {
+            return this.state.value;
+        }
+
         _update = props =>
             this.textMaskElement.update({
                 value: props.value,
