@@ -3,66 +3,7 @@
 import React, {Component, PureComponent} from 'react';
 import {Text, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
-import styleEqual from 'style-equal';
-import {type} from './helpers';
-
-function elementEquals(a, b) {
-    const typeOfA = type(a);
-
-    if (typeOfA !== type(b)) return false;
-
-    switch (typeOfA) {
-        case 'array':
-            if (a.length !== b.length) return false;
-            for (let i = 0; i < a.length; i++) {
-                if (!elementEquals(a[i], b[i])) return false;
-            }
-            return true;
-        case 'object':
-            if (a.type !== b.type) return false;
-            if (a.key !== b.key) return false;
-            if (a.ref !== b.ref) return false;
-            return shallowElementEquals(a.props, b.props); // eslint-disable-line no-use-before-define
-        default:
-            return a === b;
-    }
-}
-
-function shallowElementEquals(a, b, options = {}) {
-    if (!options.exclude) options.exclude = []; // eslint-disable-line no-param-reassign
-
-    const aKeys = Object.keys(a);
-    let aCount = 0;
-    let bCount = 0;
-
-    for (let key = 0, l = aKeys.length; key < l; key++) {
-        if (options.exclude.indexOf(key) === -1) {
-            if (key === 'style') {
-                // NOTE: kind of risky, but i'm assuming that a `style` prop is a React Native style,
-                // and using the `styleEqual` algorithm here.
-                if (!styleEqual(a[key], b[key])) return false;
-            }
-            else if (key === 'children') {
-                // will compare children later
-            }
-            else if (a[key] !== b[key]) return false;
-            aCount += 1;
-        }
-    }
-
-    const bKeys = Object.keys(b);
-
-    for (let key = 0, l = bKeys.length; key < l; key++) {
-        if (options.exclude.indexOf(key) === -1) {
-            bCount += 1;
-        }
-    }
-
-    if (aCount !== bCount) return false;
-
-    // compare children last...
-    return elementEquals(a.children, b.children);
-}
+import {propsEqual} from 'react-shallow-equal';
 
 export class TextInputAdapter extends Component {
     static propTypes = {
@@ -80,8 +21,8 @@ export class TextInputAdapter extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return !shallowElementEquals(this.props, nextProps, {
-            exclude: ['value', 'caretPosition'],
+        return !propsEqual(this.props, nextProps, {
+            ignore: ['value', 'caretPosition'],
         });
     }
 

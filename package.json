@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "hoist-non-react-statics": "^2.2.0",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "react-shallow-equal": "^0.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -46,7 +47,6 @@
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "style-equal": "^1.0.0",
     "text-mask-addons": "^3.6.0",
     "text-mask-core": "^5.0.1"
   },
@@ -71,7 +71,6 @@
   "files": [
     "src",
     "dist",
-    "React.js",
     "ReactNative.js"
   ],
   "jest": {
