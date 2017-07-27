@@ -7,8 +7,7 @@ component for [React](https://facebook.github.io/react/) and
 `text-mask` is great. It's a feature-rich solution for creating input
 masks for various libraries and frameworks. However the React
 implementation has some long-standing bugs and feature requests that
-bury the potential of the library. `react-text-mask-hoc` is a
-successful attempt to release the full power of `text-mask` and React.
+bury the potential of the library.
 
 __Features:__
 
@@ -28,10 +27,8 @@ for more information.
 - [API](#api)
   - [`createMaskedComponent`](#createmaskedcomponentwrappedcomponent)
   - [Adapters](#adapters)
-    - for React: [`InputAdapter`](#inputadapter) and
-    [`SpanAdapter`](#spanadapter)
-    - for React Native: [`TextInputAdapter`](#textinputadapter) and
-    [`TextAdapter`](#textadapter)
+    - for React: `InputAdapter` and `SpanAdapter`
+    - for React Native: `TextInputAdapter` and `TextAdapter`
   - [`TextMaskElement`](#textmaskelement)
 
 ## Install
@@ -79,7 +76,7 @@ const MaskedInput = createMaskedComponent(TextInputAdapter);
 A [HOC](https://facebook.github.io/react/docs/higher-order-components.html)
 that grants `text-mask` functionality to the wrapped component.
 
-It's a controlled component and it maintains its own state, however
+It's an uncontrolled component and it maintains its own state, however
 it can also be controlled with props.
 
 __Arguments__
@@ -89,7 +86,17 @@ follows the [adapter](#adapters) specification.
 
 __Returns__
 
-A React component.
+A React component that accepts the following props:
+
+- all [`text-mask` settings](https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md)
+- `[value]` _(String|Number)_: A value that will be masked. Works as
+the default value by default, and can be used to update the masked
+value at any time. Defaults to `''`.
+- `[onChange]` _(Function)_: A function that is called on input changes.
+Takes 2 arguments: the native `event` (varies from a platform) and
+the next state (has `value` and `caretPosition` properties).
+- `[componentRef]` _(Function)_: A function that is called with a
+reference to the `WrappedComponent`.
 
 See [the source code](https://github.com/Vlad-Zhukov/react-text-mask-hoc/blob/master/src/createMaskedComponent.js)
 for a list of props it takes.

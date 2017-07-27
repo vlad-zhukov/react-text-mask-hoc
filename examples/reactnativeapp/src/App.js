@@ -2,17 +2,18 @@
 
 import React, {PureComponent} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {createMaskedComponent, TextInputAdapter, TextAdapter} from 'react-text-mask-hoc/src/index.ReactNative'; // haul doesn't like rebuilds
+// haul dislikes rebuilds
+import {createMaskedComponent, TextInputAdapter, TextAdapter} from 'react-text-mask-hoc/src/index.ReactNative';
 
 const MaskedTextInput = createMaskedComponent(TextInputAdapter);
 const MaskedText = createMaskedComponent(TextAdapter);
 
 export default class ReactNativeApp extends PureComponent {
-    phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
     state = {
         value: '12345',
     };
+
+    phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
     _onChange = (event) => {
         this.setState({value: event.text});
