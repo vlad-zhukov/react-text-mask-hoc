@@ -2,13 +2,14 @@
 
 import React, {PureComponent} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-// haul doesn't like rebuilds
-import {createMaskedComponent, TextInputAdapter, TextAdapter} from 'react-text-mask-hoc/src/index.ReactNative';
+import {createMaskedComponent, TextInputAdapter, TextAdapter} from 'react-text-mask-hoc/src/index.ReactNative'; // haul doesn't like rebuilds
 
 const MaskedTextInput = createMaskedComponent(TextInputAdapter);
 const MaskedText = createMaskedComponent(TextAdapter);
 
 export default class ReactNativeApp extends PureComponent {
+    phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
     state = {
         value: '12345',
     };
@@ -18,23 +19,21 @@ export default class ReactNativeApp extends PureComponent {
     };
 
     render() {
-        const phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
         return (
             <View style={styles.Container}>
                 <View style={styles.Field}>
                     <Text style={styles.FieldTitle}>Phone Number</Text>
                     <MaskedTextInput
-                        mask={phoneMask}
+                        mask={this.phoneMask}
                         guide={false}
                         value={this.state.value}
                         onChange={this._onChange}
                         style={styles.FieldInput}
-                        maxLength={phoneMask.length}
+                        maxLength={this.phoneMask.length} // removes last character flickering
                     />
                 </View>
                 <View style={styles.Field}>
-                    <MaskedText mask={phoneMask} guide value={this.state.value} style={styles.FieldInput} />
+                    <MaskedText mask={this.phoneMask} guide value={this.state.value} style={styles.FieldInput} />
                 </View>
             </View>
         );

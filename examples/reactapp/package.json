@@ -1,6 +1,6 @@
 {
   "name": "reactapp",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-text-mask-hoc": "^0.4.1"
+    "react-text-mask-hoc": "file:../.."
   },
   "devDependencies": {
     "react-scripts": "^1.0.10"

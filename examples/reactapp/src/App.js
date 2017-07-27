@@ -5,17 +5,21 @@ const MaskedInput = createMaskedComponent(InputAdapter);
 const MaskedSpan = createMaskedComponent(SpanAdapter);
 
 export default class App extends PureComponent {
-    state = {
-        value: '12345',
-    };
+    constructor(props, context) {
+        super(props, context);
 
-    _onChange = (event) => {
-        this.setState({value: event.target.value});
-    };
+        this.phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
+        this.state = {
+            value: '12345',
+        };
+
+        this._onChange = (event) => {
+            this.setState({value: event.target.value});
+        };
+    }
 
     render() {
-        const phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
         return (
             <form className="form-horizontal">
                 <div className="form-group">
@@ -24,7 +28,7 @@ export default class App extends PureComponent {
                     </label>
                     <div className="col-sm-3">
                         <MaskedInput
-                            mask={phoneMask}
+                            mask={this.phoneMask}
                             guide={false}
                             value={this.state.value}
                             onChange={this._onChange}
@@ -33,7 +37,7 @@ export default class App extends PureComponent {
                         />
                     </div>
                     <div className="col-sm-3">
-                        <MaskedSpan mask={phoneMask} guide value={this.state.value} className="form-control" />
+                        <MaskedSpan mask={this.phoneMask} guide value={this.state.value} className="form-control" />
                     </div>
                 </div>
             </form>
