@@ -98,10 +98,14 @@ export default function createMaskedComponent(WrappedComponent) {
                 const rawValue = typeof event.target === 'object' ? event.target.value : event.text;
                 const nextUpdate = this._update({...this.props, value: rawValue});
 
-                if (nextUpdate !== null) this.setState(nextUpdate);
-                else this.forceUpdate();
-
-                this.props.onChange(event);
+                if (nextUpdate !== null) {
+                    this.props.onChange(event, nextUpdate);
+                    this.setState(nextUpdate);
+                }
+                else {
+                    this.props.onChange(event, this.state);
+                    this.forceUpdate();
+                }
             }
         };
 
