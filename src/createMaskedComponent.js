@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import TextMaskElement from './TextMaskElement';
-import {getDisplayName} from './helpers';
+
+const getDisplayName = Comp => Comp.displayName || Comp.name || 'Unknown';
 
 export default function createMaskedComponent(WrappedComponent) {
     class TextMask extends Component {
