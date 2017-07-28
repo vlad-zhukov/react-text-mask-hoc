@@ -1,21 +1,36 @@
 import React, {PureComponent} from 'react';
 import {createMaskedComponent, InputAdapter, SpanAdapter} from 'react-text-mask-hoc';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 const MaskedInput = createMaskedComponent(InputAdapter);
 const MaskedSpan = createMaskedComponent(SpanAdapter);
+
+const phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+const dollarMask = createNumberMask({
+    prefix: '',
+    suffix: ' $',
+    thousandsSeparatorSymbol: ' ',
+    integerLimit: 10,
+    allowDecimal: true,
+    decimalSymbol: ',',
+    decimalLimit: 2,
+});
 
 export default class App extends PureComponent {
     constructor(props, context) {
         super(props, context);
 
-        this.phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
         this.state = {
-            value: '12345',
+            phoneValue: '12345',
+            dollarValue: '100',
         };
 
-        this._onChange = (event) => {
-            this.setState({value: event.target.value});
+        this._onChangePhone = (event) => {
+            this.setState({phoneValue: event.target.value});
+        };
+
+        this._onChangeDollars = (event) => {
+            this.setState({dollarValue: event.target.value});
         };
     }
 
@@ -28,16 +43,34 @@ export default class App extends PureComponent {
                     </label>
                     <div className="col-sm-3">
                         <MaskedInput
-                            mask={this.phoneMask}
+                            value={this.state.phoneValue}
+                            mask={phoneMask}
                             guide={false}
-                            value={this.state.value}
-                            onChange={this._onChange}
+                            onChange={this._onChangePhone}
                             className="form-control"
                             id="1"
                         />
                     </div>
                     <div className="col-sm-3">
-                        <MaskedSpan mask={this.phoneMask} guide value={this.state.value} className="form-control" />
+                        <MaskedSpan value={this.state.phoneValue} mask={phoneMask} guide className="form-control" />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="1" className="col-sm-4 control-label">
+                        US Dollar Amount
+                    </label>
+                    <div className="col-sm-3">
+                        <MaskedInput
+                            value={this.state.dollarValue}
+                            mask={dollarMask}
+                            guide={false}
+                            onChange={this._onChangeDollars}
+                            className="form-control"
+                            id="1"
+                        />
+                    </div>
+                    <div className="col-sm-3">
+                        <MaskedSpan value={this.state.dollarValue} mask={dollarMask} guide className="form-control" />
                     </div>
                 </div>
             </form>
