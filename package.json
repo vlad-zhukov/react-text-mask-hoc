@@ -21,7 +21,7 @@
   "dependencies": {
     "hoist-non-react-statics": "^2.2.1",
     "prop-types": "^15.5.10",
-    "react-shallow-equal": "^0.1.0"
+    "react-shallow-equal": "^0.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
