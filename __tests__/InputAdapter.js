@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {mount} from 'enzyme';
-import {emailMask} from 'text-mask-addons';
+import emailMask from 'text-mask-addons/dist/emailMask';
 import {createMaskedComponent, InputAdapter} from '../src/index';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
