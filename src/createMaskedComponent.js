@@ -32,7 +32,7 @@ export default function createMaskedComponent(WrappedComponent) {
         };
 
         static defaultProps = {
-            value: '',
+            value: null,
             guide: true,
             pipe: null,
             placeholderChar: '_',
@@ -49,7 +49,8 @@ export default function createMaskedComponent(WrappedComponent) {
             this.textMaskElement = null;
 
             this.textMaskElement = new TextMaskElement();
-            const nextUpdate = this._update(props);
+            const value = props.value != null ? props.value : '';
+            const nextUpdate = this._update({...props, value});
 
             if (nextUpdate !== null) {
                 this.state = {
@@ -66,7 +67,8 @@ export default function createMaskedComponent(WrappedComponent) {
         }
 
         componentWillReceiveProps(nextProps) {
-            const nextUpdate = this._update(nextProps);
+            const value = nextProps.value != null ? nextProps.value : this.state.value;
+            const nextUpdate = this._update({...nextProps, value});
             if (nextUpdate !== null) this.setState(nextUpdate);
         }
 

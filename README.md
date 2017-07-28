@@ -89,17 +89,19 @@ __Returns__
 A React component that accepts the following props:
 
 - all [`text-mask` settings](https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md)
-- `[value]` _(String|Number)_: A value that will be masked. Works as
-the default value by default, and can be used to update the masked
-value at any time. Defaults to `''`.
+- `[value]` _(String|Number)_: A value that will be masked. If set it
+will turn the component into the controlled one. Defaults to `null`.
 - `[onChange]` _(Function)_: A function that is called on input changes.
 Takes 2 arguments: the native `event` (varies from a platform) and
 the next state (has `value` and `caretPosition` properties).
 - `[componentRef]` _(Function)_: A function that is called with a
 reference to the `WrappedComponent`.
 
-See [the source code](https://github.com/Vlad-Zhukov/react-text-mask-hoc/blob/master/src/createMaskedComponent.js)
-for a list of props it takes.
+__Instance methods__
+
+- the `value` getter
+- `focus()`
+- `blur()`
 
 ---
 
