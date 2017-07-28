@@ -1,14 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {propsEqual} from 'react-shallow-equal';
 import hoistStatics from 'hoist-non-react-statics';
 import TextMaskElement from './TextMaskElement';
 
 const getDisplayName = Comp => Comp.displayName || Comp.name || 'Unknown';
 
 export default function createMaskedComponent(WrappedComponent) {
-    class TextMask extends Component {
+    class TextMask extends PureComponent {
         static displayName = `TextMask(${getDisplayName(WrappedComponent)})`;
 
         static propTypes = {
@@ -67,9 +68,13 @@ export default function createMaskedComponent(WrappedComponent) {
         }
 
         componentWillReceiveProps(nextProps) {
-            const value = nextProps.value != null ? nextProps.value : this.state.value;
-            const nextUpdate = this._update({...nextProps, value});
-            if (nextUpdate !== null) this.setState(nextUpdate);
+            if (!propsEqual(this.props, nextProps)) {
+                const value = nextProps.value != null ? nextProps.value : this.state.value;
+                const nextUpdate = this._update({...nextProps, value});
+                if (nextUpdate !== null) {
+                    this.setState(nextUpdate);
+                }
+            }
         }
 
         get value() {
