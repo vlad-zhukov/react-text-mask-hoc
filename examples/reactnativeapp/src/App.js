@@ -59,7 +59,7 @@ export default class ReactNativeApp extends PureComponent {
                         <MaskedTextInput
                             value={this.state.dollarValue}
                             mask={dollarMask}
-                            guide={false}
+                            guide
                             onChange={this._onChangeDollars}
                             style={styles.FieldInput}
                         />

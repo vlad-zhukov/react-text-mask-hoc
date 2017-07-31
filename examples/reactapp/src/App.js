@@ -63,7 +63,7 @@ export default class App extends PureComponent {
                         <MaskedInput
                             value={this.state.dollarValue}
                             mask={dollarMask}
-                            guide={false}
+                            guide
                             onChange={this._onChangeDollars}
                             className="form-control"
                             id="1"
