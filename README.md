@@ -25,7 +25,8 @@ for more information.
 - [Usage](#usage)
 - [Examples](#examples)
 - [API](#api)
-  - [`createMaskedComponent`](#createmaskedcomponentwrappedcomponent)
+  - [`TextMask`](#textmask)
+  - [`createTextMask`](#createtextmaskwrappedcomponent)
   - [Adapters](#adapters)
     - for React: `InputAdapter` and `SpanAdapter`
     - for React Native: `TextInputAdapter` and `TextAdapter`
@@ -42,14 +43,12 @@ npm install --save react-text-mask-hoc
 ## Usage
 
 ```jsx
-import React, {PureComponent} from 'react';
-import {createMaskedComponent, InputAdapter} from 'react-text-mask-hoc';
-
-// You can provide your own adapter component or use one of included in the library.
-const MaskedInput = createMaskedComponent(InputAdapter);
+import {TextMask, InputAdapter} from 'react-text-mask-hoc';
 
 export default () =>
-    <MaskedInput
+    <TextMask
+        // You can provide your own adapter component or use one of included in the library.
+        Component={InputAdapter}
         mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
         guide={false}
         value="5554953947"
@@ -59,9 +58,7 @@ export default () =>
 To use in React Native import `react-text-mask-hoc/ReactNative` instead:
 
 ```jsx
-import {createMaskedComponent, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
-
-const MaskedInput = createMaskedComponent(TextInputAdapter);
+import {TextMask, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
 ```
 
 ## Examples
@@ -71,31 +68,25 @@ const MaskedInput = createMaskedComponent(TextInputAdapter);
 
 ## API
 
-### `createMaskedComponent(AdaptedComponent)`
+### `TextMask`
 
-A [HOC](https://facebook.github.io/react/docs/higher-order-components.html)
-that grants `text-mask` functionality to the wrapped component.
+A component that grants `text-mask` functionality to the passed component.
 
 It's an uncontrolled component and it maintains its own state, however
 it can also be controlled with props.
 
-__Arguments__
-
-1. `AdaptedComponent` _(React.Component)_: A React component that
-follows the [adapter](#adapters) specification.
-
-__Returns__
-
-A React component that accepts the following props:
+__Props__
 
 - all [`text-mask` settings](https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md)
+- `Component` _(React.Component)_: A component that follows the [adapter](#adapters)
+specification.
 - `[value]` _(String|Number)_: A value that will be masked. If set it
 will turn the component into the controlled one. Defaults to `null`.
 - `[onChange]` _(Function)_: A function that is called on input changes.
 Takes 2 arguments: the native `event` (varies from a platform) and
 the next state (has `value` and `caretPosition` properties).
 - `[componentRef]` _(Function)_: A function that is called with a
-reference to the `WrappedComponent`.
+reference to the `Component`.
 
 __Instance methods__
 
@@ -103,12 +94,45 @@ __Instance methods__
 - `focus()`
 - `blur()`
 
+### `createTextMask(AdaptedComponent)`
+
+A helper [HOC](https://facebook.github.io/react/docs/higher-order-components.html)
+that passes `AdaptedComponent` down to the [`TextMask`](#textmask).
+
+__Arguments__
+
+1. `AdaptedComponent` _(React.Component)_: A component that
+follows the [adapter](#adapters) specification.
+
+__Returns__
+
+An extended `TextMask`.
+
+__Usage__
+
+```jsx
+import {createTextMask} from 'react-text-mask-hoc';
+
+class MyAdapterComponent extends React.Component {
+    // ...
+}
+
+const MyTextMaskComponent = createTextMask(MyAdapterComponent)
+
+export default () =>
+    <MyTextMaskComponent
+        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+        guide={false}
+        value="5554953947"
+    />;
+```
+
 ---
 
 ### Adapters
 
 Adapters are React components that implement a special interface for the
-[`createMaskedComponent`](#createmaskedcomponentwrappedcomponent).
+[`createTextMask`](#createtextmaskwrappedcomponent).
 
 List of adapters included in this library:
 
