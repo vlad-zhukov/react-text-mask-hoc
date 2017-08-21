@@ -26,12 +26,12 @@ export class TextInputAdapter extends Component {
         });
     }
 
-    _selection;
-    _lastOnChangeEvent;
-
     get caretPosition() {
         return this._selection || 0;
     }
+
+    _selection;
+    _lastOnChangeEvent;
 
     _setNativeProps(value, caretPosition) {
         this.input.setNativeProps({text: value});

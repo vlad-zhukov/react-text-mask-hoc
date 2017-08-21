@@ -1,9 +1,6 @@
 import React, {PureComponent} from 'react';
-import {createMaskedComponent, InputAdapter, SpanAdapter} from 'react-text-mask-hoc';
+import {TextMask, InputAdapter, SpanAdapter} from 'react-text-mask-hoc';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-
-const MaskedInput = createMaskedComponent(InputAdapter);
-const MaskedSpan = createMaskedComponent(SpanAdapter);
 
 const phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 const dollarMask = createNumberMask({
@@ -42,7 +39,8 @@ export default class App extends PureComponent {
                         Phone Number
                     </label>
                     <div className="col-sm-3">
-                        <MaskedInput
+                        <TextMask
+                            Component={InputAdapter}
                             value={this.state.phoneValue}
                             mask={phoneMask}
                             guide={false}
@@ -52,7 +50,13 @@ export default class App extends PureComponent {
                         />
                     </div>
                     <div className="col-sm-3">
-                        <MaskedSpan value={this.state.phoneValue} mask={phoneMask} guide className="form-control" />
+                        <TextMask
+                            Component={SpanAdapter}
+                            value={this.state.phoneValue}
+                            mask={phoneMask}
+                            guide
+                            className="form-control"
+                        />
                     </div>
                 </div>
                 <div className="form-group">
@@ -60,7 +64,8 @@ export default class App extends PureComponent {
                         US Dollar Amount
                     </label>
                     <div className="col-sm-3">
-                        <MaskedInput
+                        <TextMask
+                            Component={InputAdapter}
                             value={this.state.dollarValue}
                             mask={dollarMask}
                             guide
@@ -70,7 +75,13 @@ export default class App extends PureComponent {
                         />
                     </div>
                     <div className="col-sm-3">
-                        <MaskedSpan value={this.state.dollarValue} mask={dollarMask} guide className="form-control" />
+                        <TextMask
+                            Component={SpanAdapter}
+                            value={this.state.dollarValue}
+                            mask={dollarMask}
+                            guide
+                            className="form-control"
+                        />
                     </div>
                 </div>
             </form>

@@ -3,11 +3,8 @@
 import React, {PureComponent} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 // haul dislikes rebuilds
-import {createMaskedComponent, TextInputAdapter, TextAdapter} from 'react-text-mask-hoc/ReactNative';
+import {TextMask, TextInputAdapter, TextAdapter} from 'react-text-mask-hoc/ReactNative';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-
-const MaskedTextInput = createMaskedComponent(TextInputAdapter);
-const MaskedText = createMaskedComponent(TextAdapter);
 
 const phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 const dollarMask = createNumberMask({
@@ -40,7 +37,8 @@ export default class ReactNativeApp extends PureComponent {
                 <View style={styles.FieldContainer}>
                     <View style={styles.Field}>
                         <Text style={styles.FieldTitle}>Phone Number</Text>
-                        <MaskedTextInput
+                        <TextMask
+                            Component={TextInputAdapter}
                             value={this.state.phoneValue}
                             mask={phoneMask}
                             guide={false}
@@ -50,13 +48,20 @@ export default class ReactNativeApp extends PureComponent {
                         />
                     </View>
                     <View style={styles.Field}>
-                        <MaskedText value={this.state.phoneValue} mask={phoneMask} guide style={styles.FieldInput} />
+                        <TextMask
+                            Component={TextAdapter}
+                            value={this.state.phoneValue}
+                            mask={phoneMask}
+                            guide
+                            style={styles.FieldInput}
+                        />
                     </View>
                 </View>
                 <View style={styles.FieldContainer}>
                     <View style={styles.Field}>
                         <Text style={styles.FieldTitle}>US Dollar Amount</Text>
-                        <MaskedTextInput
+                        <TextMask
+                            Component={TextInputAdapter}
                             value={this.state.dollarValue}
                             mask={dollarMask}
                             guide
@@ -65,7 +70,13 @@ export default class ReactNativeApp extends PureComponent {
                         />
                     </View>
                     <View style={styles.Field}>
-                        <MaskedText value={this.state.dollarValue} mask={dollarMask} guide style={styles.FieldInput} />
+                        <TextMask
+                            Component={TextAdapter}
+                            value={this.state.dollarValue}
+                            mask={dollarMask}
+                            guide
+                            style={styles.FieldInput}
+                        />
                     </View>
                 </View>
             </View>

@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {mount} from 'enzyme';
 import emailMask from 'text-mask-addons/dist/emailMask';
-import {createMaskedComponent, InputAdapter} from '../src/index';
+import {createTextMask, TextMask, InputAdapter} from '../src/index';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -13,8 +13,6 @@ function setup(options = {}) {
         guide: true,
         ...options,
     };
-
-    const MaskedInput = createMaskedComponent(InputAdapter);
 
     class StatefulWrapper extends Component {
         state = {
@@ -36,9 +34,10 @@ function setup(options = {}) {
         render() {
             const {value, ...rest} = this.props;
             return (
-                <MaskedInput
+                <TextMask
                     {...rest}
                     {...this.state}
+                    Component={InputAdapter}
                     onChange={this._onChange}
                     componentRef={this._componentRef}
                     ref={this._getRef}
@@ -48,7 +47,7 @@ function setup(options = {}) {
     }
 
     const wrapper = mount(<StatefulWrapper {...opts} />);
-    const component = wrapper.find(MaskedInput);
+    const component = wrapper.find(TextMask);
     const inputAdapter = component.find(InputAdapter);
     const input = inputAdapter.find('input');
 
@@ -62,11 +61,11 @@ function setup(options = {}) {
 
 describe('InputAdapter', () => {
     it('does not throw when instantiated', () => {
-        expect(() => createMaskedComponent(InputAdapter)).not.toThrow();
+        expect(() => createTextMask(InputAdapter)).not.toThrow();
     });
 
     it('does not throw when mounted', () => {
-        const MaskedInput = createMaskedComponent(InputAdapter);
+        const MaskedInput = createTextMask(InputAdapter);
 
         expect(() => mount(<MaskedInput mask={PHONE_MASK} />)).not.toThrow();
     });

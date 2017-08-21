@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const rollup = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
 const babel = require('rollup-plugin-babel');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 const pkg = require('./package.json');
 
-const plugins = [commonjs(), resolve(), babel()];
-const external = ['react', 'react-native', 'prop-types', 'hoist-non-react-statics'];
+const plugins = [babel(), resolve(), commonjs()];
+const external = ['react', 'react-native'].concat(Object.keys(pkg.dependencies));
 
 rollup
     .rollup({
@@ -26,6 +26,9 @@ rollup
             format: 'es',
             sourceMap: true,
         });
+    })
+    .catch((e) => {
+        console.log(e);
     });
 
 rollup
@@ -40,4 +43,7 @@ rollup
             format: 'es',
             sourceMap: true,
         });
+    })
+    .catch((e) => {
+        console.log(e);
     });
