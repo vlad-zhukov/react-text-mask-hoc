@@ -16,7 +16,7 @@ function getSafeRawValue(inputValue) {
     );
 }
 
-export default class TextMaskElement {
+export default class TextMaskTransformer {
     previousRawValue = undefined;
     previousConformedValue = undefined;
     previousPlaceholder = undefined;

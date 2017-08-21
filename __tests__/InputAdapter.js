@@ -91,13 +91,13 @@ describe('InputAdapter', () => {
         expect(wrapperInstance._component).toBeInstanceOf(InputAdapter);
     });
 
-    it('initializes textMaskElement property', () => {
+    it('initializes textMaskTransformer property', () => {
         const {wrapper} = setup();
         const maskedInput = wrapper.instance()._ref;
 
-        expect(maskedInput.textMaskElement).toBeDefined();
-        expect(typeof maskedInput.textMaskElement).toBe('object');
-        expect(typeof maskedInput.textMaskElement.update).toBe('function');
+        expect(maskedInput.textMaskTransformer).toBeDefined();
+        expect(typeof maskedInput.textMaskTransformer).toBe('object');
+        expect(typeof maskedInput.textMaskTransformer.update).toBe('function');
     });
 
     it('throws if mask property was not set', () => {
@@ -200,13 +200,13 @@ describe('InputAdapter', () => {
         expect(inputElement.value).toBe('(123) 45_-____');
     });
 
-    it('calls textMaskElement.update() and props.onChange() when an input event is received', () => {
+    it('calls textMaskTransformer.update() and props.onChange() when an input event is received', () => {
         const {wrapper, input} = setup();
         const wrapperInstance = wrapper.instance();
         const maskedInput = wrapperInstance._ref;
         const inputElement = input.getDOMNode();
 
-        const updateSpy = jest.spyOn(maskedInput.textMaskElement, 'update');
+        const updateSpy = jest.spyOn(maskedInput.textMaskTransformer, 'update');
         input.simulate('change', {target: {value: '123'}});
 
         expect(inputElement.value).toBe('(123) ___-____');
@@ -214,13 +214,13 @@ describe('InputAdapter', () => {
         expect(updateSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('calls textMaskElement.update() when an input event is received when props.onChange() is not set', () => {
+    it('calls textMaskTransformer.update() when an input event is received when props.onChange() is not set', () => {
         const {wrapper, input} = setup();
         const wrapperInstance = wrapper.instance();
         const maskedInput = wrapperInstance._ref;
         const inputElement = input.getDOMNode();
 
-        const updateSpy = jest.spyOn(maskedInput.textMaskElement, 'update');
+        const updateSpy = jest.spyOn(maskedInput.textMaskTransformer, 'update');
         wrapperInstance._onChange = undefined;
         input.simulate('change', {target: {value: '123'}});
 
@@ -234,7 +234,7 @@ describe('InputAdapter', () => {
         const maskedInput = wrapper.instance()._ref;
         const inputElement = input.getDOMNode();
 
-        const updateSpy = jest.spyOn(maskedInput.textMaskElement, 'update');
+        const updateSpy = jest.spyOn(maskedInput.textMaskTransformer, 'update');
 
         expect(inputElement.value).toBe('(123) ___-____');
         expect(updateSpy).toHaveBeenCalledTimes(0);

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {propsEqual} from 'react-shallow-equal';
-import TextMaskElement from './TextMaskElement';
+import TextMaskTransformer from './TextMaskTransformer';
 
 export default class TextMask extends PureComponent {
     static propTypes = {
@@ -40,9 +40,9 @@ export default class TextMask extends PureComponent {
         super(props, context);
 
         this.component = null;
-        this.textMaskElement = null;
+        this.textMaskTransformer = null;
 
-        this.textMaskElement = new TextMaskElement();
+        this.textMaskTransformer = new TextMaskTransformer();
         const value = props.value != null ? props.value : '';
         const nextUpdate = this._update({...props, value});
 
@@ -75,7 +75,7 @@ export default class TextMask extends PureComponent {
     }
 
     _update = props =>
-        this.textMaskElement.update({
+        this.textMaskTransformer.update({
             value: props.value,
             caretPosition: this.component != null ? this.component.caretPosition : 0,
             mask: props.mask,
