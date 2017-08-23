@@ -11,20 +11,20 @@ const external = ['react', 'react-native'].concat(Object.keys(pkg.dependencies))
 
 rollup
     .rollup({
-        entry: './src/index.js',
+        input: './src/index.js',
         plugins,
         external,
     })
     .then((bundle) => {
         bundle.write({
-            dest: pkg.main,
+            file: pkg.main,
             format: 'cjs',
-            sourceMap: true,
+            sourcemap: true,
         });
         bundle.write({
-            dest: pkg.module,
+            file: pkg.module,
             format: 'es',
-            sourceMap: true,
+            sourcemap: true,
         });
     })
     .catch((e) => {
@@ -33,15 +33,15 @@ rollup
 
 rollup
     .rollup({
-        entry: './src/index.ReactNative.js',
+        input: './src/index.ReactNative.js',
         plugins,
         external,
     })
     .then((bundle) => {
         bundle.write({
-            dest: './dist/react-text-mask-hoc.ReactNative.js',
+            file: './dist/react-text-mask-hoc.ReactNative.js',
             format: 'es',
-            sourceMap: true,
+            sourcemap: true,
         });
     })
     .catch((e) => {
