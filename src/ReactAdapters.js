@@ -3,6 +3,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
+const isAndroid = navigator != null && /Android/i.test(navigator.userAgent);
+
 export class InputAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -23,7 +25,16 @@ export class InputAdapter extends PureComponent {
     }
 
     _setCaretPosition() {
-        this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
+        if (this.input === document.activeElement) {
+            if (isAndroid === true) {
+                setTimeout(() => {
+                    this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
+                }, 0);
+            }
+            else {
+                this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
+            }
+        }
     }
 
     _getRef = (ref) => {
