@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-text-mask-hoc": "^0.7.0",
+    "react-text-mask-hoc": "^0.8.0",
     "text-mask-addons": "^3.6.0"
   },
   "devDependencies": {
