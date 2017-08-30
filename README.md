@@ -26,7 +26,7 @@ for more information.
 - [Examples](#examples)
 - [API](#api)
   - [`TextMask`](#textmask)
-  - [`createTextMask`](#createtextmaskadaptedcomponent)
+  - [`withTextMask`](#withtextmaskadaptedcomponent)
   - [Adapters](#adapters)
     - for React: `InputAdapter` and `SpanAdapter`
     - for React Native: `TextInputAdapter` and `TextAdapter`
@@ -94,7 +94,7 @@ __Instance methods__
 - `focus()`
 - `blur()`
 
-### `createTextMask(AdaptedComponent)`
+### `withTextMask(AdaptedComponent)`
 
 A helper [HOC](https://facebook.github.io/react/docs/higher-order-components.html)
 that passes `AdaptedComponent` down to the [`TextMask`](#textmask).
@@ -111,13 +111,13 @@ An extended `TextMask`.
 __Usage__
 
 ```jsx
-import {createTextMask} from 'react-text-mask-hoc';
+import {withTextMask} from 'react-text-mask-hoc';
 
 class MyAdapterComponent extends React.Component {
     // ...
 }
 
-const MyTextMaskComponent = createTextMask(MyAdapterComponent)
+const MyTextMaskComponent = withTextMask(MyAdapterComponent)
 
 export default () =>
     <MyTextMaskComponent
@@ -132,7 +132,7 @@ export default () =>
 ### Adapters
 
 Adapters are React components that implement a special interface for the
-[`createTextMask`](#createtextmaskadaptedcomponent).
+[`withTextMask`](#withtextmaskadaptedcomponent).
 
 List of adapters included in this library:
 

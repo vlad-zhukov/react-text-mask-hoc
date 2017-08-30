@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {mount} from 'enzyme';
 import emailMask from 'text-mask-addons/dist/emailMask';
-import {createTextMask, TextMask, InputAdapter} from '../src/index';
+import {withTextMask, TextMask, InputAdapter} from '../src/index';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -61,11 +61,11 @@ function setup(options = {}) {
 
 describe('InputAdapter', () => {
     it('does not throw when instantiated', () => {
-        expect(() => createTextMask(InputAdapter)).not.toThrow();
+        expect(() => withTextMask(InputAdapter)).not.toThrow();
     });
 
     it('does not throw when mounted', () => {
-        const MaskedInput = createTextMask(InputAdapter);
+        const MaskedInput = withTextMask(InputAdapter);
 
         expect(() => mount(<MaskedInput mask={PHONE_MASK} />)).not.toThrow();
     });
