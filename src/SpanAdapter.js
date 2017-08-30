@@ -18,10 +18,6 @@ export default class SpanAdapter extends PureComponent {
     render() {
         const {value, caretPosition, onChange, ...rest} = this.props;
 
-        return (
-            <span {...rest}>
-                {value}
-            </span>
-        );
+        return <span {...rest}>{value}</span>;
     }
 }
