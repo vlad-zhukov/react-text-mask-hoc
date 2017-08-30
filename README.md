@@ -26,11 +26,11 @@ for more information.
 - [Examples](#examples)
 - [API](#api)
   - [`TextMask`](#textmask)
-  - [`createTextMask`](#createtextmaskwrappedcomponent)
+  - [`createTextMask`](#createtextmaskadaptedcomponent)
   - [Adapters](#adapters)
     - for React: `InputAdapter` and `SpanAdapter`
     - for React Native: `TextInputAdapter` and `TextAdapter`
-  - [`TextMaskElement`](#textmaskelement)
+  - [`TextMaskTransformer`](#textmasktransformer)
 
 ## Install
 
@@ -132,7 +132,7 @@ export default () =>
 ### Adapters
 
 Adapters are React components that implement a special interface for the
-[`createTextMask`](#createtextmaskwrappedcomponent).
+[`createTextMask`](#createtextmaskadaptedcomponent).
 
 List of adapters included in this library:
 
@@ -155,7 +155,7 @@ for examples.
 
 ---
 
-### `TextMaskElement`
+### `TextMaskTransformer`
 
 A class that calculates a value and a caret position. Based on the
 `createTextMaskInputElement()` from [`text-mask-core`](https://github.com/text-mask/text-mask/tree/master/core).
