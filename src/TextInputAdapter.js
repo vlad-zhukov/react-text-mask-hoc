@@ -1,11 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies, react/no-multi-comp */
+/* eslint-disable import/no-extraneous-dependencies */
 
-import React, {Component, PureComponent} from 'react';
-import {Text, TextInput} from 'react-native';
+import React, {Component} from 'react';
+import {TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 import {propsEqual} from 'react-shallow-equal';
 
-export class TextInputAdapter extends Component {
+export default class TextInputAdapter extends Component {
     static propTypes = {
         value: PropTypes.string.isRequired,
         caretPosition: PropTypes.number.isRequired,
@@ -67,29 +67,6 @@ export class TextInputAdapter extends Component {
                 onChange={this._onChange}
                 onSelectionChange={this._onSelectionChange}
             />
-        );
-    }
-}
-
-export class TextAdapter extends PureComponent {
-    static propTypes = {
-        value: PropTypes.string.isRequired,
-        caretPosition: PropTypes.number.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
-
-    // eslint-disable-next-line class-methods-use-this
-    get caretPosition() {
-        return 0;
-    }
-
-    render() {
-        const {value, caretPosition, onChange, ...rest} = this.props;
-
-        return (
-            <Text {...rest}>
-                {value}
-            </Text>
         );
     }
 }

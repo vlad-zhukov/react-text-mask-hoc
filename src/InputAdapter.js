@@ -1,11 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies, react/no-multi-comp */
+/* eslint-disable import/no-extraneous-dependencies */
 
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 const isAndroid = navigator != null && /Android/i.test(navigator.userAgent);
 
-export class InputAdapter extends PureComponent {
+export default class InputAdapter extends PureComponent {
     static propTypes = {
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         caretPosition: PropTypes.number.isRequired,
@@ -45,28 +45,5 @@ export class InputAdapter extends PureComponent {
         const {caretPosition, ...rest} = this.props;
 
         return <input ref={this._getRef} type="text" {...rest} />;
-    }
-}
-
-export class SpanAdapter extends PureComponent {
-    static propTypes = {
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        caretPosition: PropTypes.number.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
-
-    // eslint-disable-next-line class-methods-use-this
-    get caretPosition() {
-        return 0;
-    }
-
-    render() {
-        const {value, caretPosition, onChange, ...rest} = this.props;
-
-        return (
-            <span {...rest}>
-                {value}
-            </span>
-        );
     }
 }
