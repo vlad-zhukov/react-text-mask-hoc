@@ -17,6 +17,8 @@ rules:
     object-curly-spacing: [error, never]
     no-console: off
 
+    import/no-extraneous-dependencies: [error, {devDependencies: true}]
+
     react/jsx-filename-extension: [warn, {extensions: [.js]}]
     react/jsx-indent: [error, 4]
     react/jsx-indent-props: [error, 4]

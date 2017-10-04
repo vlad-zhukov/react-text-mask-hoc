@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import React, {PureComponent} from 'react';
 import {Text} from 'react-native';
 import PropTypes from 'prop-types';

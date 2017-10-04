@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle, react/prop-types */
 
 import React, {Component} from 'react';
-import {mount} from 'enzyme';
 import emailMask from 'text-mask-addons/dist/emailMask';
+import {render} from '../__test-helpers__/reactHelpers';
 import {withTextMask, TextMask, InputAdapter} from '../src/index';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
@@ -46,7 +46,7 @@ function setup(options = {}) {
         }
     }
 
-    const wrapper = mount(<StatefulWrapper {...opts} />);
+    const wrapper = render(<StatefulWrapper {...opts} />);
     const component = wrapper.find(TextMask);
     const inputAdapter = component.find(InputAdapter);
     const input = inputAdapter.find('input');
@@ -67,7 +67,7 @@ describe('InputAdapter', () => {
     it('does not throw when mounted', () => {
         const MaskedInput = withTextMask(InputAdapter);
 
-        expect(() => mount(<MaskedInput mask={PHONE_MASK} />)).not.toThrow();
+        expect(() => render(<MaskedInput mask={PHONE_MASK} />)).not.toThrow();
     });
 
     it('renders a single InputAdapter element', () => {
@@ -228,7 +228,7 @@ describe('InputAdapter', () => {
         expect(updateSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('calls textMaskInputElement.update() via onChange()', () => {
+    it('calls textMaskTransformer.update() via onChange()', () => {
         const {wrapper, input} = setup({value: '123'});
         const maskedInput = wrapper.instance()._ref;
         const inputElement = input.getDOMNode();

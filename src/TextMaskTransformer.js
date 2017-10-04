@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import adjustCaretPosition from 'text-mask-core/src/adjustCaretPosition';
 import conformToMask from 'text-mask-core/src/conformToMask';
 import {convertMaskToPlaceholder, isString, isNumber, processCaretTraps} from 'text-mask-core/src/utilities';

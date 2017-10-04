@@ -40,9 +40,8 @@ export default class TextMask extends PureComponent {
         super(props, context);
 
         this.component = null;
-        this.textMaskTransformer = null;
-
         this.textMaskTransformer = new TextMaskTransformer();
+
         const value = props.value != null ? props.value : '';
         const nextUpdate = this._update({...props, value});
 
