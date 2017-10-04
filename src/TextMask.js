@@ -69,7 +69,8 @@ export default class TextMask extends PureComponent {
         }
 
         if (!propsEqual(this.props, nextProps, {ignore})) {
-            const value = nextProps.value != null ? nextProps.value : this.state.value;
+            const value =
+                nextProps.isControlled === true && nextProps.value != null ? nextProps.value : this.state.value;
             const nextUpdate = this._update({...nextProps, value});
             if (nextUpdate !== null) {
                 this.setState(nextUpdate);

@@ -1,6 +1,6 @@
 {
   "name": "react-text-mask-hoc",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "A higher-order text-mask component for React and React Native.",
   "author": "Vlad Zhukov (http://github.com/Vlad-Zhukov)",
   "license": "MIT",
