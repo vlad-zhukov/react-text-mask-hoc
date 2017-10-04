@@ -16,6 +16,7 @@ export default class TextMask extends PureComponent {
             }),
         ]).isRequired,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        isControlled: PropTypes.bool,
         guide: PropTypes.bool,
         pipe: PropTypes.func,
         placeholderChar: PropTypes.string,
@@ -27,6 +28,7 @@ export default class TextMask extends PureComponent {
 
     static defaultProps = {
         value: null,
+        isControlled: true,
         guide: true,
         pipe: null,
         placeholderChar: '_',
@@ -60,7 +62,13 @@ export default class TextMask extends PureComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (!propsEqual(this.props, nextProps)) {
+        const ignore = [];
+
+        if (nextProps.isControlled === false) {
+            ignore.push('value');
+        }
+
+        if (!propsEqual(this.props, nextProps, {ignore})) {
             const value = nextProps.value != null ? nextProps.value : this.state.value;
             const nextUpdate = this._update({...nextProps, value});
             if (nextUpdate !== null) {
@@ -120,6 +128,7 @@ export default class TextMask extends PureComponent {
         const {
             Component,
             value,
+            isControlled,
             mask,
             guide,
             pipe,

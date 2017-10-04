@@ -72,16 +72,21 @@ import {TextMask, TextInputAdapter} from 'react-text-mask-hoc/ReactNative';
 
 A component that grants `text-mask` functionality to the passed component.
 
-It's an uncontrolled component and it maintains its own state, however
-it can also be controlled with props.
+It's a controlled component by default, but it also maintains its own
+state, however it can also be switched to uncontrolled.
 
 __Props__
 
 - all [`text-mask` settings](https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md)
 - `Component` _(React.Component)_: A component that follows the [adapter](#adapters)
 specification.
-- `[value]` _(String|Number)_: A value that will be masked. If set it
-will turn the component into the controlled one. Defaults to `null`.
+- `[value]` _(String|Number)_: A value that will be masked. Will be used
+as an initial value on mounting, and later can be used to control
+the component. If `isControlled` prop is set to `false`, the value will
+be ignored on rerenders. Defaults to `null`.
+- `[isControlled]` _(Boolean)_: A way to set the component behaviour
+to be controlled by a `value` prop or to ignore it (to be uncontrolled).
+Can also be used to switch it in runtime. Defaults to `true`.
 - `[onChange]` _(Function)_: A function that is called on input changes.
 Takes 2 arguments: the native `event` (varies from a platform) and
 the next state (has `value` and `caretPosition` properties).

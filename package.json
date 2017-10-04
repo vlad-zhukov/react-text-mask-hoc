@@ -16,7 +16,7 @@
     "test": "jest",
     "lint": "eslint \"**/*.js\"",
     "prettier": "prettier-eslint \"**/*.js\" --write",
-    "prepublishOnly": "yarn run lint && yarn run build && yarn run test"
+    "prepublishOnly": "yarn lint && yarn build && yarn test"
   },
   "dependencies": {
     "enzyme-adapter-react-16": "^1.0.1",
