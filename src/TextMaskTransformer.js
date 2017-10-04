@@ -15,7 +15,6 @@ function getSafeRawValue(inputValue) {
 }
 
 export default class TextMaskTransformer {
-    previousRawValue = undefined;
     previousConformedValue = undefined;
     previousPlaceholder = undefined;
 
@@ -31,11 +30,9 @@ export default class TextMaskTransformer {
     }) {
         // If `rawValue` equals `state.previousConformedValue`, we don't need to change anything. So, we return.
         // This check is here to handle controlled framework components that repeat the `update` call on every render.
-        if (rawValue === this.previousConformedValue || rawValue === this.previousRawValue) {
+        if (rawValue === this.previousConformedValue) {
             return null;
         }
-
-        this.previousRawValue = rawValue;
 
         // Text Mask accepts masks that are a combination of a `mask` and a `pipe` that work together.
         // If such a `mask` is passed, we destructure it below, so the rest of the code can work normally

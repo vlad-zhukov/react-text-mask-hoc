@@ -107,8 +107,9 @@ export default class TextMask extends PureComponent {
             const nextUpdate = this._update({...this.props, value: rawValue});
 
             if (nextUpdate !== null) {
-                this.props.onChange(event, nextUpdate);
-                this.setState(nextUpdate);
+                this.setState(nextUpdate, () => {
+                    this.props.onChange(event, nextUpdate);
+                });
             }
             else {
                 this.props.onChange(event, this.state);
