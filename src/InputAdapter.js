@@ -39,9 +39,14 @@ export default class InputAdapter extends PureComponent {
         this.input = ref;
     };
 
-    render() {
-        const {caretPosition, ...rest} = this.props;
+    _onChange = (event) => {
+        event.persist();
+        this.props.onChange(event);
+    };
 
-        return <input ref={this._getRef} type="text" {...rest} />;
+    render() {
+        const {caretPosition, onChange, ...rest} = this.props;
+
+        return <input ref={this._getRef} type="text" onChange={this._onChange} {...rest} />;
     }
 }
