@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-const isAndroid = navigator != null && /Android/i.test(navigator.userAgent);
+const isAndroid = typeof navigator !== 'undefined' && navigator !== null && /android/i.test(navigator.userAgent);
+const isDocument = typeof document !== 'undefined' && document !== null;
 
 export default class InputAdapter extends PureComponent {
     static propTypes = {
@@ -23,7 +24,7 @@ export default class InputAdapter extends PureComponent {
     }
 
     _setCaretPosition() {
-        if (this.input === document.activeElement) {
+        if (isDocument && this.input === document.activeElement) {
             if (isAndroid === true) {
                 setTimeout(() => {
                     this.input.setSelectionRange(this.props.caretPosition, this.props.caretPosition, 'none');
