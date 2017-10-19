@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-for */
+
 import React, {PureComponent} from 'react';
 import {TextMask, InputAdapter, SpanAdapter} from 'react-text-mask-hoc';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
@@ -35,7 +37,7 @@ export default class App extends PureComponent {
         return (
             <form className="form-horizontal">
                 <div className="form-group">
-                    <label htmlFor="1" className="col-sm-4 control-label">
+                    <label className="col-sm-4 control-label" htmlFor="1">
                         Phone Number
                     </label>
                     <div className="col-sm-3">
@@ -60,7 +62,7 @@ export default class App extends PureComponent {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="1" className="col-sm-4 control-label">
+                    <label className="col-sm-4 control-label" htmlFor="2">
                         US Dollar Amount
                     </label>
                     <div className="col-sm-3">
@@ -71,7 +73,7 @@ export default class App extends PureComponent {
                             guide
                             onChange={this._onChangeDollars}
                             className="form-control"
-                            id="1"
+                            id="2"
                         />
                     </div>
                     <div className="col-sm-3">

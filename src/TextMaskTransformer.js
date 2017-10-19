@@ -43,7 +43,7 @@ export default class TextMaskTransformer {
             providedMask.pipe != null &&
             providedMask.mask != null
         ) {
-            /* eslint-disable no-param-reassign */
+            /* eslint-disable no-param-reassign, prefer-destructuring */
             pipe = providedMask.pipe;
             providedMask = providedMask.mask;
             /* eslint-enable */

@@ -154,10 +154,6 @@ An adapter must be a React component that takes `value`, `caretPosition`
 and `onChange` props, and exposes a `caretPosition` getter that always
 returns a positive integer number.
 
-See [ReactAdapters.js](https://github.com/Vlad-Zhukov/react-text-mask-hoc/blob/master/src/ReactAdapters.js)
-and [ReactNativeAdapters.js](https://github.com/Vlad-Zhukov/react-text-mask-hoc/blob/master/src/ReactNativeAdapters.js)
-for examples.
-
 ---
 
 ### `TextMaskTransformer`

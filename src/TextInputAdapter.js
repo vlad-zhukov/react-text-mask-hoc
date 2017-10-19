@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TextInput} from 'react-native';
+import {TextInput} from 'react-native'; // eslint-disable-line
 import PropTypes from 'prop-types';
 import {propsEqual} from 'react-shallow-equal';
 

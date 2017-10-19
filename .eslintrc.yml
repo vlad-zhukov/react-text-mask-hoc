@@ -15,6 +15,8 @@ rules:
     no-underscore-dangle: [error, {allowAfterThis: true, allowAfterSuper: true}]
     no-plusplus: [error, {allowForLoopAfterthoughts: true}]
     object-curly-spacing: [error, never]
+    object-curly-newline: off
+    function-paren-newline: off
     no-console: off
 
     import/no-extraneous-dependencies: [error, {devDependencies: true}]
