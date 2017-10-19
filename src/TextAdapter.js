@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Text} from 'react-native'; // eslint-disable-line
+import {Text} from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class TextAdapter extends PureComponent {
