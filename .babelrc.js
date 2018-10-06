@@ -1,11 +1,11 @@
 const env = process.env.NODE_ENV;
 
-const presets = ['react', 'stage-2'];
-const plugins = [];
+const presets = ['@babel/preset-react'];
+const plugins = ['@babel/plugin-proposal-class-properties'];
 
 if (env === 'test') {
     presets.unshift([
-        'env',
+        '@babel/preset-env',
         {
             targets: {node: 'current'},
         },
@@ -14,14 +14,12 @@ if (env === 'test') {
 
 if (env === 'production') {
     presets.unshift([
-        'env',
+        '@babel/preset-env',
         {
             targets: {node: 6, browsers: ['> 1%']},
             modules: false,
         },
     ]);
-
-    plugins.push('external-helpers');
 }
 
 module.exports = {presets, plugins};
