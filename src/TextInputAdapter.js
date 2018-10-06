@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {TextInput} from 'react-native'; // eslint-disable-line
-import PropTypes from 'prop-types';
 import {propsEqual} from 'react-shallow-equal';
 
-export default class TextInputAdapter extends Component {
-    static propTypes = {
-        value: PropTypes.string.isRequired,
-        caretPosition: PropTypes.number.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
+export default class TextInputAdapter extends React.Component {
+    constructor(props) {
+        super(props);
+        this._lastOnChangeEvent = undefined;
+        this._selection = undefined;
+        this._onSelectionChange = this._onSelectionChange.bind(this);
+        this._onChange = this._onChange.bind(this);
+        this._getRef = this._getRef.bind(this);
+    }
+
 
     componentDidMount() {
         this._setNativeProps(this.props.value, this.props.caretPosition);
@@ -30,7 +33,7 @@ export default class TextInputAdapter extends Component {
 
     // onChange() runs before onSelectionChange(), so when text-mask gets selection
     // it's a previous value instead of the current one.
-    _onSelectionChange = event => {
+    _onSelectionChange(event) {
         this._selection = event.nativeEvent.selection.end;
 
         if (this._lastOnChangeEvent) {
@@ -39,11 +42,11 @@ export default class TextInputAdapter extends Component {
         }
     };
 
-    _onChange = ({nativeEvent}) => {
+    _onChange({nativeEvent}) {
         this._lastOnChangeEvent = nativeEvent;
     };
 
-    _getRef = ref => {
+    _getRef(ref) {
         this.input = ref;
     };
 
@@ -51,10 +54,6 @@ export default class TextInputAdapter extends Component {
         this.input.setNativeProps({text: value});
         this.input.setNativeProps({selection: {start: caretPosition, end: caretPosition}});
     }
-
-    _lastOnChangeEvent;
-
-    _selection;
 
     render() {
         const {value, caretPosition, onChange, ...rest} = this.props;

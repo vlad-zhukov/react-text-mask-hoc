@@ -1,15 +1,15 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 const isAndroid = typeof navigator !== 'undefined' && navigator !== null && /android/i.test(navigator.userAgent);
 const isDocument = typeof document !== 'undefined' && document !== null;
 
-export default class InputAdapter extends PureComponent {
-    static propTypes = {
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        caretPosition: PropTypes.number.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
+export default class InputAdapter extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this._getRef = this._getRef.bind(this);
+        this._onChange = this._onChange.bind(this);
+    }
+
 
     componentDidMount() {
         this._setCaretPosition();
@@ -23,11 +23,11 @@ export default class InputAdapter extends PureComponent {
         return this.input.selectionEnd;
     }
 
-    _getRef = ref => {
+    _getRef(ref) {
         this.input = ref;
     };
 
-    _onChange = event => {
+    _onChange(event) {
         event.persist();
         this.props.onChange(event);
     };

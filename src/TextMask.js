@@ -1,45 +1,13 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import {propsEqual} from 'react-shallow-equal';
 import TextMaskTransformer from './TextMaskTransformer';
 
-export default class TextMask extends PureComponent {
-    static propTypes = {
-        Component: PropTypes.func, // eslint-disable-line react/require-default-props
-        mask: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.func,
-            PropTypes.bool,
-            PropTypes.shape({
-                mask: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
-                pipe: PropTypes.func,
-            }),
-        ]).isRequired,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        isControlled: PropTypes.bool,
-        guide: PropTypes.bool,
-        pipe: PropTypes.func,
-        placeholderChar: PropTypes.string,
-        keepCharPositions: PropTypes.bool,
-        showMask: PropTypes.bool,
-        onChange: PropTypes.func,
-        componentRef: PropTypes.func,
-    };
-
-    static defaultProps = {
-        value: null,
-        isControlled: true,
-        guide: true,
-        pipe: null,
-        placeholderChar: '_',
-        keepCharPositions: false,
-        showMask: false,
-        onChange: () => {},
-        componentRef: () => {},
-    };
-
+export default class TextMask extends React.PureComponent {
     constructor(props, context) {
         super(props, context);
+        this._update = this._update.bind(this);
+        this._getRef = this._getRef.bind(this);
+        this._onChange = this._onChange.bind(this);
 
         this.component = null;
         this.textMaskTransformer = new TextMaskTransformer();
@@ -81,8 +49,8 @@ export default class TextMask extends PureComponent {
         return this.state.value;
     }
 
-    _update = props =>
-        this.textMaskTransformer.update({
+    _update(props) {
+        return this.textMaskTransformer.update({
             value: props.value,
             caretPosition: this.component != null ? this.component.caretPosition : 0,
             mask: props.mask,
@@ -92,15 +60,16 @@ export default class TextMask extends PureComponent {
             keepCharPositions: props.keepCharPositions,
             showMask: props.showMask,
         });
+    }
 
-    _getRef = comp => {
+    _getRef(comp) {
         if (comp) {
             this.props.componentRef(comp);
             this.component = comp;
         }
     };
 
-    _onChange = event => {
+    _onChange(event){
         if (event) {
             const rawValue = typeof event.target === 'object' ? event.target.value : event.text;
             const nextUpdate = this._update({...this.props, value: rawValue});
@@ -151,3 +120,15 @@ export default class TextMask extends PureComponent {
         );
     }
 }
+
+TextMask.defaultProps = {
+    value: null,
+    isControlled: true,
+    guide: true,
+    pipe: null,
+    placeholderChar: '_',
+    keepCharPositions: false,
+    showMask: false,
+    onChange: () => {},
+    componentRef: () => {},
+};

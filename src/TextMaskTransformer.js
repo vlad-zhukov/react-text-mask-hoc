@@ -15,9 +15,10 @@ function getSafeRawValue(inputValue) {
 }
 
 export default class TextMaskTransformer {
-    previousConformedValue = undefined;
-
-    previousPlaceholder = undefined;
+    constructor() {
+        this.previousConformedValue= undefined;
+        this.previousPlaceholder= undefined;
+    }
 
     update({
         value: rawValue,

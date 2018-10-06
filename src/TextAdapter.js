@@ -1,14 +1,7 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {Text} from 'react-native'; // eslint-disable-line
-import PropTypes from 'prop-types';
 
-export default class TextAdapter extends PureComponent {
-    static propTypes = {
-        value: PropTypes.string.isRequired,
-        caretPosition: PropTypes.number.isRequired,
-        onChange: PropTypes.func.isRequired,
-    };
-
+export default class TextAdapter extends React.PureComponent {
     // eslint-disable-next-line class-methods-use-this
     get caretPosition() {
         return 0;
