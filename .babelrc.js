@@ -4,22 +4,14 @@ const presets = ['@babel/preset-react'];
 const plugins = [];
 
 if (env === 'test') {
-    presets.unshift([
-        '@babel/preset-env',
-        {
-            targets: {node: 'current'},
-        },
-    ]);
+    plugins.push(
+        ['@babel/plugin-transform-modules-commonjs'],
+        ['@babel/plugin-proposal-object-rest-spread', {loose: true}]
+    );
 }
 
 if (env === 'production') {
-    presets.unshift([
-        '@babel/preset-env',
-        {
-            targets: {node: '6.6'},
-            modules: false,
-        },
-    ]);
+    plugins.push(['@babel/plugin-proposal-object-rest-spread', {loose: true}]);
 }
 
 module.exports = {presets, plugins};

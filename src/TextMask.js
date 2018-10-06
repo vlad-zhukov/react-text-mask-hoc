@@ -67,9 +67,9 @@ export default class TextMask extends React.PureComponent {
             this.props.componentRef(comp);
             this.component = comp;
         }
-    };
+    }
 
-    _onChange(event){
+    _onChange(event) {
         if (event) {
             const rawValue = typeof event.target === 'object' ? event.target.value : event.text;
             const nextUpdate = this._update({...this.props, value: rawValue});
@@ -83,7 +83,7 @@ export default class TextMask extends React.PureComponent {
                 this.forceUpdate();
             }
         }
-    };
+    }
 
     focus() {
         if (this.component.input) this.component.input.focus();

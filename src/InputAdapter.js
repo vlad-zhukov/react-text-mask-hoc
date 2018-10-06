@@ -10,7 +10,6 @@ export default class InputAdapter extends React.PureComponent {
         this._onChange = this._onChange.bind(this);
     }
 
-
     componentDidMount() {
         this._setCaretPosition();
     }
@@ -25,12 +24,12 @@ export default class InputAdapter extends React.PureComponent {
 
     _getRef(ref) {
         this.input = ref;
-    };
+    }
 
     _onChange(event) {
         event.persist();
         this.props.onChange(event);
-    };
+    }
 
     _setCaretPosition() {
         if (isDocument && this.input === document.activeElement) {

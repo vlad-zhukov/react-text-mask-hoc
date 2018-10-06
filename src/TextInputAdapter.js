@@ -12,7 +12,6 @@ export default class TextInputAdapter extends React.Component {
         this._getRef = this._getRef.bind(this);
     }
 
-
     componentDidMount() {
         this._setNativeProps(this.props.value, this.props.caretPosition);
     }
@@ -40,15 +39,15 @@ export default class TextInputAdapter extends React.Component {
             this.props.onChange(this._lastOnChangeEvent);
             this._lastOnChangeEvent = undefined;
         }
-    };
+    }
 
     _onChange({nativeEvent}) {
         this._lastOnChangeEvent = nativeEvent;
-    };
+    }
 
     _getRef(ref) {
         this.input = ref;
-    };
+    }
 
     _setNativeProps(value, caretPosition) {
         this.input.setNativeProps({text: value});
