@@ -8,7 +8,7 @@ if (env === 'test') {
         'env',
         {
             targets: {node: 'current'},
-        }
+        },
     ]);
 }
 
@@ -17,11 +17,11 @@ if (env === 'production') {
         'env',
         {
             targets: {node: 6, browsers: ['> 1%']},
-            modules: false
-        }
+            modules: false,
+        },
     ]);
 
-    plugins.push('external-helpers')
+    plugins.push('external-helpers');
 }
 
 module.exports = {presets, plugins};

@@ -17,7 +17,7 @@ rollup
         plugins,
         external,
     })
-    .then((bundle) => {
+    .then(bundle => {
         bundle.write({
             file: pkg.main,
             format: 'cjs',
@@ -29,7 +29,7 @@ rollup
             sourcemap: true,
         });
     })
-    .catch((e) => {
+    .catch(e => {
         console.log(e);
     });
 
@@ -39,13 +39,13 @@ rollup
         plugins,
         external,
     })
-    .then((bundle) => {
+    .then(bundle => {
         bundle.write({
             file: './dist/react-text-mask-hoc.ReactNative.js',
             format: 'es',
             sourcemap: true,
         });
     })
-    .catch((e) => {
+    .catch(e => {
         console.log(e);
     });

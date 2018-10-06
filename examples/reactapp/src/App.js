@@ -24,11 +24,11 @@ export default class App extends PureComponent {
             dollarValue: '100',
         };
 
-        this._onChangePhone = (event) => {
+        this._onChangePhone = event => {
             this.setState({phoneValue: event.target.value});
         };
 
-        this._onChangeDollars = (event) => {
+        this._onChangeDollars = event => {
             this.setState({dollarValue: event.target.value});
         };
     }

@@ -19,15 +19,15 @@ function setup(options = {}) {
             value: this.props.value || '',
         };
 
-        _onChange = jest.fn((event) => {
+        _onChange = jest.fn(event => {
             this.setState({value: event.target.value});
         });
 
-        _componentRef = jest.fn((ref) => {
+        _componentRef = jest.fn(ref => {
             this._component = ref;
         });
 
-        _getRef = (ref) => {
+        _getRef = ref => {
             this._ref = ref;
         };
 
@@ -106,7 +106,7 @@ describe('InputAdapter', () => {
     it('accepts function as mask property', () => {
         const {input} = setup({
             value: '12345',
-            mask: (value) => {
+            mask: value => {
                 expect(value).toBe('12345');
                 return PHONE_MASK;
             },
@@ -124,7 +124,7 @@ describe('InputAdapter', () => {
     it('accepts pipe function', () => {
         const {input} = setup({
             value: '12345',
-            pipe: (value) => {
+            pipe: value => {
                 expect(value).toBe('(123) 45_-____');
                 return 'abc';
             },

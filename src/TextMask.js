@@ -52,8 +52,7 @@ export default class TextMask extends PureComponent {
                 value: nextUpdate.value,
                 caretPosition: nextUpdate.caretPosition,
             };
-        }
-        else {
+        } else {
             this.state = {
                 value: '',
                 caretPosition: 0,
@@ -94,14 +93,14 @@ export default class TextMask extends PureComponent {
             showMask: props.showMask,
         });
 
-    _getRef = (comp) => {
+    _getRef = comp => {
         if (comp) {
             this.props.componentRef(comp);
             this.component = comp;
         }
     };
 
-    _onChange = (event) => {
+    _onChange = event => {
         if (event) {
             const rawValue = typeof event.target === 'object' ? event.target.value : event.text;
             const nextUpdate = this._update({...this.props, value: rawValue});
@@ -110,8 +109,7 @@ export default class TextMask extends PureComponent {
                 this.setState(nextUpdate, () => {
                     this.props.onChange(event, nextUpdate);
                 });
-            }
-            else {
+            } else {
                 this.props.onChange(event, this.state);
                 this.forceUpdate();
             }

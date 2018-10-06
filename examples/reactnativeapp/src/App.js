@@ -23,11 +23,11 @@ export default class ReactNativeApp extends PureComponent {
         dollarValue: '100',
     };
 
-    _onChangePhone = (event) => {
+    _onChangePhone = event => {
         this.setState({phoneValue: event.text});
     };
 
-    _onChangeDollars = (event) => {
+    _onChangeDollars = event => {
         this.setState({dollarValue: event.text});
     };
 

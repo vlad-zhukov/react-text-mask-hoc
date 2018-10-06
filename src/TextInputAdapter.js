@@ -28,25 +28,9 @@ export default class TextInputAdapter extends Component {
         return this._selection || 0;
     }
 
-    _selection;
-    _lastOnChangeEvent;
-
-    _setNativeProps(value, caretPosition) {
-        this.input.setNativeProps({text: value});
-        this.input.setNativeProps({selection: {start: caretPosition, end: caretPosition}});
-    }
-
-    _getRef = (ref) => {
-        this.input = ref;
-    };
-
-    _onChange = ({nativeEvent}) => {
-        this._lastOnChangeEvent = nativeEvent;
-    };
-
     // onChange() runs before onSelectionChange(), so when text-mask gets selection
     // it's a previous value instead of the current one.
-    _onSelectionChange = (event) => {
+    _onSelectionChange = event => {
         this._selection = event.nativeEvent.selection.end;
 
         if (this._lastOnChangeEvent) {
@@ -54,6 +38,23 @@ export default class TextInputAdapter extends Component {
             this._lastOnChangeEvent = undefined;
         }
     };
+
+    _onChange = ({nativeEvent}) => {
+        this._lastOnChangeEvent = nativeEvent;
+    };
+
+    _getRef = ref => {
+        this.input = ref;
+    };
+
+    _setNativeProps(value, caretPosition) {
+        this.input.setNativeProps({text: value});
+        this.input.setNativeProps({selection: {start: caretPosition, end: caretPosition}});
+    }
+
+    _lastOnChangeEvent;
+
+    _selection;
 
     render() {
         const {value, caretPosition, onChange, ...rest} = this.props;

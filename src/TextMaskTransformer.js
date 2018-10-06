@@ -16,6 +16,7 @@ function getSafeRawValue(inputValue) {
 
 export default class TextMaskTransformer {
     previousConformedValue = undefined;
+
     previousPlaceholder = undefined;
 
     update({
@@ -105,8 +106,7 @@ export default class TextMaskTransformer {
             placeholder = convertMaskToPlaceholder(mask, placeholderChar);
 
             // If the `providedMask` is not a function, we just use it as-is.
-        }
-        else {
+        } else {
             mask = providedMask;
         }
 
@@ -132,7 +132,10 @@ export default class TextMaskTransformer {
         // If `pipe` is a function, we call it.
         if (piped) {
             // `pipe` receives the `conformedValue` and the configurations with which `conformToMask` was called.
-            pipeResults = pipe(conformedValue, {rawValue: safeRawValue, ...conformToMaskConfig});
+            pipeResults = pipe(
+                conformedValue,
+                {rawValue: safeRawValue, ...conformToMaskConfig}
+            );
 
             // `pipeResults` should be an object. But as a convenience, we allow the pipe author to just
             // return `false` to indicate rejection. Or return just a string when there are no piped characters.
@@ -142,8 +145,7 @@ export default class TextMaskTransformer {
                 // If the `pipe` rejects `conformedValue`, we use the `previousConformedValue`,
                 // and set `rejected` to `true`.
                 pipeResults = {value: this.previousConformedValue, rejected: true};
-            }
-            else if (isString(pipeResults)) {
+            } else if (isString(pipeResults)) {
                 pipeResults = {value: pipeResults};
             }
         }
