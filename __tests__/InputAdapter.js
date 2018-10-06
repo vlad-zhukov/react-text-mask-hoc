@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import emailMask from 'text-mask-addons/dist/emailMask';
 import {render} from '../__test-helpers__/reactHelpers';
-import {withTextMask, TextMask, InputAdapter} from '../src/index';
+import {withTextMask, TextMask, InputAdapter} from '../dist/react-text-mask-hoc.cjs';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 

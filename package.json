@@ -29,9 +29,10 @@
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "cross-env": "^5.2.0",
-    "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
@@ -39,7 +40,8 @@
     "eslint-plugin-jest": "^21.24.1",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "^7.11.1",
-    "jest": "^21.3.0-beta.2",
+    "jest": "^23.6.0",
+    "jest-circus": "^23.6.0",
     "prettier": "^1.14.3",
     "raf": "^3.4.0",
     "react": "^16.0.0",
@@ -76,12 +78,13 @@
     "ReactNative.js"
   ],
   "jest": {
+    "testRunner": "jest-circus/runner",
     "roots": [
       "<rootDir>/__tests__/"
     ],
-    "transformIgnorePatterns": [
-      "/node_modules((?!text-mask-core).)*$/"
-    ]
+    "transform": {
+      ".js$": "babel-jest"
+    }
   },
   "prettier": {
     "printWidth": 120,

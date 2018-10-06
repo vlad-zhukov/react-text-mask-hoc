@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '../__test-helpers__/reactHelpers';
-import {withTextMask, SpanAdapter} from '../src/index';
+import {withTextMask, SpanAdapter} from '../dist/react-text-mask-hoc.cjs';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
