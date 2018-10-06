@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import emailMask from 'text-mask-addons/dist/emailMask';
 import {render} from '../__test-helpers__/reactHelpers';
-import {withTextMask, TextMask, InputAdapter} from '../dist/react-text-mask-hoc.cjs';
+import {TextMask, InputAdapter} from '../dist/react-text-mask-hoc.cjs';
 
 const PHONE_MASK = ['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -15,21 +15,25 @@ function setup(options = {}) {
     };
 
     class StatefulWrapper extends Component {
-        state = {
-            value: this.props.value || '',
-        };
+        constructor(props) {
+            super(props);
 
-        _onChange = jest.fn(event => {
-            this.setState({value: event.target.value});
-        });
+            this.state = {
+                value: this.props.value || '',
+            };
 
-        _componentRef = jest.fn(ref => {
-            this._component = ref;
-        });
+            this._onChange = jest.fn(event => {
+                this.setState({value: event.target.value});
+            });
 
-        _getRef = ref => {
-            this._ref = ref;
-        };
+            this._componentRef = jest.fn(ref => {
+                this._component = ref;
+            });
+
+            this._getRef = ref => {
+                this._ref = ref;
+            };
+        }
 
         render() {
             const {value, ...rest} = this.props;
@@ -60,14 +64,8 @@ function setup(options = {}) {
 }
 
 describe('InputAdapter', () => {
-    it('does not throw when instantiated', () => {
-        expect(() => withTextMask(InputAdapter)).not.toThrow();
-    });
-
     it('does not throw when mounted', () => {
-        const MaskedInput = withTextMask(InputAdapter);
-
-        expect(() => render(<MaskedInput mask={PHONE_MASK} />)).not.toThrow();
+        expect(() => render(<TextMask Component={InputAdapter} mask={PHONE_MASK} />)).not.toThrow();
     });
 
     it('renders a single InputAdapter element', () => {
