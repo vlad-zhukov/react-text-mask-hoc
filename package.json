@@ -18,8 +18,8 @@
     "prepublishOnly": "yarn lint && yarn build && yarn test"
   },
   "dependencies": {
-    "hoist-non-react-statics": "^2.3.1",
-    "prop-types": "^15.6.0",
+    "hoist-non-react-statics": "^3.0.1",
+    "prop-types": "^15.6.2",
     "react-shallow-equal": "^0.1.1"
   },
   "devDependencies": {
@@ -44,15 +44,15 @@
     "jest-circus": "^23.6.0",
     "prettier": "^1.14.3",
     "raf": "^3.4.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "rimraf": "^2.6.2",
     "rollup": "^0.66.4",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.1.8",
     "rollup-plugin-node-resolve": "^3.4.0",
-    "text-mask-addons": "^3.7.0",
-    "text-mask-core": "^5.0.1"
+    "text-mask-addons": "^3.8.0",
+    "text-mask-core": "^5.1.2"
   },
   "peerDependencies": {
     "react": ">=15"
